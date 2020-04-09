@@ -1,0 +1,14 @@
+{
+  "slime_green": {
+    "hp": 40,
+    "atk": 18,
+    "defend": 1,
+    "agi": 0
+  },
+  "slime_black": {
+    "hp": 50,
+    "atk": 20,
+    "defend": 4,
+    "agi": 0
+  }
+}

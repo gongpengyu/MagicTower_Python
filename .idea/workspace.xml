@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2b402cf7-147a-423f-a1c7-329a0d8d2114" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aHWBwNhQ3HKhAzyeVhhCLlCbcJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Data_project\Python_project\TestMota2\source" />
+      <recent name="G:\Data_project\Python_project\TestMota2\source\com" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Data_project\Python_project\TestMota2\source" />
+      <recent name="G:\Data_project\Python_project\TestMota2" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Unnamed">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="TestMota2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\UserOffice\python\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_item" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TestMota2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/test/test_item.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_map" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TestMota2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/test/test_map.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_monster" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TestMota2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/test/test_monster.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_monsterlist" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TestMota2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/test/test_monsterlist.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Unnamed" />
+      <item itemvalue="Python.test_monster" />
+      <item itemvalue="Python.test_item" />
+      <item itemvalue="Python.test_map" />
+      <item itemvalue="Python.test_monsterlist" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test_monsterlist" />
+        <item itemvalue="Python.test_map" />
+        <item itemvalue="Python.test_item" />
+        <item itemvalue="Python.test_monster" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2b402cf7-147a-423f-a1c7-329a0d8d2114" name="Default Changelist" comment="" />
+      <created>1586392867154</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586392867154</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2030" y="218" width="1094" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586394926215">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state x="2030" y="218" width="1094" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586394926215" />
+    <state width="1369" height="466" key="DebuggerActiveHint" timestamp="1586442916531">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1369" height="466" key="DebuggerActiveHint/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586442916531" />
+    <state x="2356" y="329" key="FileChooserDialogImpl" timestamp="1586393453311">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state x="2356" y="329" key="FileChooserDialogImpl/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586393453311" />
+    <state width="1899" height="332" key="GridCell.Tab.0.bottom" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.0.bottom/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state width="1899" height="332" key="GridCell.Tab.0.center" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.0.center/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state width="1899" height="332" key="GridCell.Tab.0.left" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.0.left/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state width="1899" height="332" key="GridCell.Tab.0.right" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.0.right/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state width="1899" height="332" key="GridCell.Tab.1.bottom" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.1.bottom/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state width="1899" height="332" key="GridCell.Tab.1.center" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.1.center/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state width="1899" height="332" key="GridCell.Tab.1.left" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.1.left/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state width="1899" height="332" key="GridCell.Tab.1.right" timestamp="1586443488995">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state width="1899" height="332" key="GridCell.Tab.1.right/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586443488995" />
+    <state x="2543" y="224" width="672" height="678" key="search.everywhere.popup" timestamp="1586437154578">
+      <screen x="1920" y="0" width="1920" height="1030" />
+    </state>
+    <state x="2543" y="224" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1586437154578" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/source/com/hero.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/source/test/test_monsterlist.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/source/control.py</url>
+          <line>195</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/source/com/creature.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/source/com/creature.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
