@@ -1,14 +1,46 @@
 {
   "slime_green": {
+    "name": "slime-green",
     "hp": 40,
     "atk": 18,
     "defend": 1,
     "agi": 0
   },
-  "slime_black": {
+  "slime_red": {
+    "name": "slime-red",
     "hp": 50,
     "atk": 20,
     "defend": 4,
     "agi": 0
+  },
+  "slime_black": {
+    "name": "slime-black",
+    "hp": 50,
+    "atk": 20,
+    "defend": 4,
+    "agi": 0
+  },
+  "bat_first": {
+    "name": "bat-first",
+    "hp": 50,
+    "atk": 32,
+    "defend": 2,
+    "agi": 4
+  },
+  "skull_first": {
+    "name": "skull-first",
+    "hp": 85,
+    "atk": 70,
+    "defend": 0,
+    "agi": 3,
+    "weak_hit": 5
+  },
+  "mummy_first": {
+    "name": "mummy-first",
+    "hp": 190,
+    "atk": 90,
+    "defend": 33,
+    "agi": 2
   }
+
 }

@@ -3,6 +3,11 @@
 #启动参数
 ORIGIN_CAPTION = "Magic Tower"
 PIXEL_GRID = 32
+# 图层指示参数
+L_G_POINTX = 12
+L_G_POINTY = 0
+L_W_G = 2
+L_H_G = 1
 
 # 总界面screen参数
 SCREEN_G_POINTX = 0
@@ -35,6 +40,11 @@ HERO_POINTY = HERO_G_POINTY * PIXEL_GRID
 HERO_WIDTH = HERO_W_G * PIXEL_GRID
 HERO_HEIGHT = HERO_H_G * PIXEL_GRID
 HERO_RECT = (HERO_POINTX, HERO_POINTY, HERO_WIDTH, HERO_HEIGHT)
+# 人物参数
+HERO_STA = {
+    "normal": "正常",
+    "weak": "虚弱"
+}
 
 # 物品区参数
 ITEM_G_POINTX = 1
@@ -47,6 +57,18 @@ ITEM_WIDTH = ITEM_W_G * PIXEL_GRID
 ITEM_HEIGHT = ITEM_H_G * PIXEL_GRID
 ITEM_RECT = (ITEM_POINTX, ITEM_POINTY, ITEM_WIDTH, ITEM_HEIGHT)
 
+# 战斗面板参数
+ATKPANE_G_POINTX = 6
+ATKPANE_G_POINTY = 5
+ATKPANE_W_G = 14
+ATKPANE_H_G = 7
+ATKPANE_REL = PIXEL_GRID/2
+ATKPANE_POINTX = ATKPANE_G_POINTX * PIXEL_GRID - ATKPANE_REL
+ATKPANE_POINTY = ATKPANE_G_POINTY * PIXEL_GRID - ATKPANE_REL
+ATKPANE_WIDTH = ATKPANE_W_G * PIXEL_GRID
+ATKPANE_HEIGHT = ATKPANE_H_G * PIXEL_GRID
+ATKPANE_RECT = (ATKPANE_POINTX, ATKPANE_POINTY, ATKPANE_WIDTH, ATKPANE_HEIGHT)
+
 # 地图参数
 MAP_B_STONE = 0
 MAP_W_STONE = 1
@@ -54,10 +76,25 @@ MAP_MAGMA = 2
 MAP_UP_FLO = 3
 MAP_DOWN_FLO = 4
 MAP_IRON_RAIL = 5
+MAP_DOOR_YELLOW = 6
+MAP_DOOR_BLUE = 7
 # 40-60 为怪物区
 MAP_MONS_SG = 40
+MAP_MONS_SR = 41
+MAP_MONS_BATF = 45
+MAP_MONS_SKULLF = 50
+MAP_MONS_MUMMYF = 55
+MAP_MONS_M = 60
 # 61-80 为npc
 MAP_NPC_RED = 61
+MAP_NPC_BLUE = 62
+# 81-100为可拾取的物品
+MAP_ITEM_RM = 81
+MAP_ITEM_RG = 85
+MAP_ITEM_BG = 86
+MAP_ITEM_YK = 89
+MAP_ITEM_BK = 90
+MAP_ITEM_RK = 91
 
 # 键盘映射
 KEY_UP =    1001
@@ -70,3 +107,253 @@ KEY_TOATK = 1009
 KEY_GITEM = 1010
 KEY_TRADE = 1011
 KEY_TOOPEN = 1012
+
+
+# 素材参数
+EVE_DOWN_FLOOR = "bg-Down_floor"
+EVENT_DOOR = "bg-Door01"
+EVENT_LAVA = "bg-Lava01"
+EVENT_OTHER = "bg-Other03"
+EVENT_WALL = "bg-Wall01"
+EVENT_ICE = "bg-Ice"
+EVE_UP_FLOOR = "bg-Up_floor"
+EVE_ACTOR = "hero-Braver01"
+MONS_1 = "Monster01"
+MONS_2 = "Monster02"
+MONS_3 = "Monster03"
+MONS_4 = "Monster04"
+MONS_5 = "Monster05"
+MONS_6 = "Monster06"
+MONS_7 = "Monster07"
+MONS_8 = "Monster08"
+MONS_9 = "Monster09"
+NPC_1 = "NPC01"
+ITEM_01 = "Item01"
+ITEM_02 = "Item02"
+ITEM_05 = "Item05"
+ITEM_GEM = "Item-Gem01"
+
+BG_STONE_IMG = {
+    "super": EVENT_WALL,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+WHITE_STONE_IMG = {
+    "super": EVENT_WALL,
+    "pointx": 64,
+    "pointy": 0,
+    "sta_rect": (64, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+BALCK_STONE_IMG = {
+    "super": EVENT_ICE,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1,1)
+}
+MAGMA_IMG = {
+    "super": EVENT_LAVA,
+    "pointx": 0,
+    "pointy": 0,
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+UP_FLOOR_IMG = {
+    "super": EVE_UP_FLOOR,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+DOWN_FLOOR_IMG = {
+    "super": EVE_DOWN_FLOOR,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+IRON_RAIL_IMG = {
+    "super": EVENT_WALL,
+    "pointx": 96,
+    "pointy": 0,
+    "sta_rect": (96, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (96, 0, 32, 128),
+    "dyn_wh_g": (1, 4)
+}
+HERO_UP_IMG = {
+    "super": EVE_ACTOR,
+    "pointx": 0,
+    "pointy": 96,
+    "sta_rect": (0, 96, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 96, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+HERO_DOWN_IMG = {
+    "super": EVE_ACTOR,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+HERO_LEFT_IMG = {
+    "super": EVE_ACTOR,
+    "pointx": 0,
+    "pointy": 32,
+    "sta_rect": (0, 32, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 32, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+HERO_RIGHT_IMG = {
+    "super": EVE_ACTOR,
+    "pointx": 0,
+    "pointy": 64,
+    "sta_rect": (0, 64, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 64, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+DOOR_YELLOW_IMG = {
+    "super": EVENT_DOOR,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 32, 128),
+    "dyn_wh_g": (4, 1)
+}
+DOOR_BLUE_IMG = {
+    "super": EVENT_DOOR,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 32, 128),
+    "dyn_wh_g": (4, 1)
+}
+
+MONS_SLING_IMG = {
+    "super": MONS_1,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_SLINR_IMG = {
+    "super": MONS_1,
+    "pointx": 0,
+    "pointy": 32,
+    "sta_rect": (0, 32, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 32, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_BATF_IMG = {
+    "super": MONS_3,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_MUMMYF_IMG = {
+    "super": MONS_9,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_SKULLF_IMG = {
+    "super": MONS_2,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+
+NPC_RED_IMG = {
+    "super": NPC_1,
+    "pointx": 0,
+    "pointy": 32,
+    "sta_rect": (0, 32, 32, 32),
+    "sta_wh_g": (1,1),
+    "dyn_rect": (0, 32, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+NPC_BLUE_IMG = {
+    "super": NPC_1,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+YKEY_IMG = {
+    "super": ITEM_01,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+BKEY_IMG = {
+    "super": ITEM_01,
+    "pointx": 32,
+    "pointy": 0,
+    "sta_rect": (32, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+RKEY_IMG = {
+    "super": ITEM_01,
+    "pointx": 64,
+    "pointy": 0,
+    "sta_rect": (64, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+COIN_IMG = {
+    "super": ITEM_05,
+    "pointx": 96,
+    "pointy": 0,
+    "sta_rect": (96, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+RED_MEDIF_IMG = {
+    "super": ITEM_02,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+RED_GEM_IMG = {
+    "super": ITEM_GEM,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+BLUE_GEM_IMG = {
+    "super": ITEM_GEM,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (32, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+
+# 颜色参数
+ALICE_BLUE = (100, 181, 191)
+PURE_BLACK = (0,     0,   0)
+PURE_WHITE = (255, 255, 255)

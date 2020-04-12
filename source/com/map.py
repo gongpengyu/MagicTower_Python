@@ -40,7 +40,7 @@ class Map():
 
     # 获取当前图层信息
     def now_layer(self):
-        print("now_layer:", self.now_index)
+        # print("now_layer:", self.now_index)
 
         if self.now_index is None:
             print(type(self.now_layer))
@@ -53,3 +53,8 @@ class Map():
     def update_layer(self, pos, value):
         now_layer = self.now_layer()
         now_layer[pos[0]][pos[1]] = value
+
+    # 获取当前图层某点value,
+    def get_value_nowlayer(self, pos):
+        now_layer = self.now_layer()
+        return now_layer[pos[0]][pos[1]]

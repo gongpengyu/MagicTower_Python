@@ -1,14 +1,16 @@
 from . import items
-
+from .. import constants as c
 # 负责主角的逻辑处理
 class Hero():
     def __init__(self):
+        self.NAME = "steve"
         self.LV = 1
         self.HP = 1000
         self.ATK = 10
         self.DEF = 10
         self.AGI = 2
         self.EXP = 0
+        self.STATE = c.HERO_STA["normal"]
         self.ITEMS = {
             "y_key": 1,
             "b_key": 1,

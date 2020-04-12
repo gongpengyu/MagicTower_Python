@@ -38,6 +38,10 @@ class CreatureList():
                     mons = Slime(self.ar_list["slime_green"])
                     m_pos = (j, i)
                     mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_SR:
+                    mons = Slime(self.ar_list["slime_red"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
                 elif layer[j][i] == c.MAP_NPC_RED:
                     npc = Npc(self.npc_list["npc_red_1"])
                     n_pos = (j, i)
