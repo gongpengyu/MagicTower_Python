@@ -33,14 +33,15 @@
     "atk": 70,
     "defend": 0,
     "agi": 3,
-    "weak_hit": 5
+    "weak_hit": 50
   },
   "mummy_first": {
     "name": "mummy-first",
     "hp": 190,
     "atk": 90,
     "defend": 33,
-    "agi": 2
+    "agi": 2,
+    "poison_hit": 99
   }
 
 }

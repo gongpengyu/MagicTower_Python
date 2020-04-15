@@ -61,7 +61,7 @@ class Control(State):
             elif data[pos[1]-1][pos[0]] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_UP
-            elif data[pos[1]-1][pos[0]] >= c.MAP_MONS_SG and data[pos[1]-1][pos[0]] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_SG <= data[pos[1] - 1][pos[0]] <= c.MAP_MONS_M:
                 m_pos = (pos[1]-1, pos[0])
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
@@ -70,7 +70,7 @@ class Control(State):
                 n_pos = (pos[1]-1, pos[0])
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
-            elif data[pos[1]-1][pos[0]] == c.MAP_IRON_RAIL:
+            elif c.MAP_IRON_RAIL <= data[pos[1]-1][pos[0]] <= c.MAP_DOOR_RED :
                 e_pos = [pos[1]-1, pos[0]]
                 self.to_open(e_pos)
             elif data[pos[1]-1][pos[0]] == c.MAP_UP_FLO:
@@ -82,7 +82,7 @@ class Control(State):
             elif data[pos[1]+1][pos[0]] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_DOWN
-            elif data[pos[1]+1][pos[0]] == c.MAP_MONS_SG and data[pos[1]+1][pos[0]] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_SG <= data[pos[1] + 1][pos[0]] <= c.MAP_MONS_M:
                 m_pos = (pos[1]+1, pos[0])
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
@@ -91,7 +91,7 @@ class Control(State):
                 n_pos = (pos[1]+1, pos[0])
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
-            elif data[pos[1]+1][pos[0]] == c.MAP_IRON_RAIL:
+            elif c.MAP_IRON_RAIL <= data[pos[1]+1][pos[0]] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1]+1, pos[0]]
                 self.to_open(e_pos)
             elif data[pos[1]+1][pos[0]] == c.MAP_UP_FLO:
@@ -103,7 +103,7 @@ class Control(State):
             elif data[pos[1]][pos[0]-1] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_LEFT
-            elif data[pos[1]][pos[0]-1] == c.MAP_MONS_SG and data[pos[1]][pos[0]-1] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_SG <= data[pos[1]][pos[0] - 1] <= c.MAP_MONS_M:
                 m_pos = (pos[1], pos[0]-1)
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
@@ -112,7 +112,7 @@ class Control(State):
                 n_pos = (pos[1], pos[0]-1)
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
-            elif data[pos[1]][pos[0]-1] == c.MAP_IRON_RAIL:
+            elif c.MAP_IRON_RAIL <= data[pos[1]][pos[0]-1] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1], pos[0]-1]
                 self.to_open(e_pos)
             elif data[pos[1]][pos[0]-1] == c.MAP_UP_FLO:
@@ -124,7 +124,7 @@ class Control(State):
             elif data[pos[1]][pos[0]+1] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_RIGHT
-            elif data[pos[1]][pos[0]+1] == c.MAP_MONS_SG and data[pos[1]][pos[0]+1] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_SG <= data[pos[1]][pos[0] + 1] <= c.MAP_MONS_M:
                 m_pos = (pos[1], pos[0]+1)
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
@@ -133,7 +133,7 @@ class Control(State):
                 n_pos = (pos[1], pos[0]+1)
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
-            elif data[pos[1]][pos[0]+1] == c.MAP_IRON_RAIL:
+            elif c.MAP_IRON_RAIL <= data[pos[1]][pos[0]+1] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1], pos[0]+1]
                 self.to_open(e_pos)
             elif data[pos[1]][pos[0]+1] == c.MAP_UP_FLO:
@@ -146,7 +146,7 @@ class Control(State):
         for i in range(4):
             self.now_shower.fresh_layer()
             self.now_shower.fresh_walk(self.pos, key, i)
-            pg.time.delay(200)
+            pg.time.delay(100)
             pg.display.update(c.ACT_RECT)
 
         if key == c.KEY_UP:
@@ -158,6 +158,15 @@ class Control(State):
         elif key == c.KEY_RIGHT:
             self.pos[0] += 1
         print(key, ":", self.pos)
+
+        # 根据状态执行相应工作
+        if self.now_hero.STATE == c.HERO_STA["normal"]:
+            pass
+        elif self.now_hero.STATE == c.HERO_STA["poison"]:
+            self.now_hero.be_poison()
+            # 刷新数据
+            self.now_shower.fresh_hero_pane()
+            pg.display.update()
 
     # 角色停止
     def to_stop(self):
@@ -190,7 +199,7 @@ class Control(State):
                     atk_direct = not atk_direct
             print("hero_hp:", hero.HP, "mons_hp:", mons.HP)
             self.now_shower.fresh_atk_pane(mons, self.now_hero)
-            pg.time.delay(200)
+            pg.time.delay(100)
             pg.display.update()
 
             # 监测键盘事件
@@ -206,18 +215,12 @@ class Control(State):
             self.mons_list.delete_mons(self.now_map.get_now_index(), pos)
             # 修改地图映射
             self.now_map.update_layer(pos, c.MAP_B_STONE)
-
-            # 刷新图层
-            self.now_shower.draw_sta_pane()
-            self.now_shower.fresh_hero_atr()
-            self.now_shower.fresh_item()
-            self.now_shower.fresh_layer()
-            self.now_shower.fresh_hero(self.pos, self.key_direct)
-            pg.display.update()
-
             print("delete it")
         else:
             print("game over")
+
+        # 刷新图层
+        self.now_shower.update_all(self.pos, self.key_direct)
 
     # 角色交易
     def to_trade(self, pos):
@@ -231,17 +234,54 @@ class Control(State):
     def to_open(self, e_pos):
         print("open door")
         door_type = self.now_map.get_value_nowlayer(e_pos)
+        print(door_type)
         if door_type == c.MAP_IRON_RAIL:
             # 开门动画
             for i in range(4):
-                self.now_shower.fresh_layer()
-                self.now_shower.fresh_hero(self.pos, self.key_direct)
+                # self.now_shower.fresh_layer()
+                # self.now_shower.fresh_hero(self.pos, self.key_direct)
                 self.now_shower.fresh_open(Tool.change_xy_pos(e_pos), door_type, i)
-                pg.time.delay(200)
+                pg.time.delay(100)
                 pg.display.update(c.ACT_RECT)
 
-        # 更新地图数据
-        self.now_map.update_layer(e_pos, c.MAP_B_STONE)
+            # 更新地图数据
+            self.now_map.update_layer(e_pos, c.MAP_B_STONE)
+        elif door_type == c.MAP_DOOR_YELLOW:
+            print("yellow door")
+            # 有钥匙才开门
+            if self.now_hero.ITEMS["y_key"] > 0:
+                self.now_hero.ITEMS["y_key"] -= 1
+                # 刷新item
+                self.now_shower.fresh_item_pane()
+                pg.display.update(c.ITEM_RECT)
+
+                for i in range(4):
+                    # self.now_shower.fresh_layer()
+                    # self.now_shower.fresh_hero(self.pos, self.key_direct)
+                    self.now_shower.fresh_open(Tool.change_xy_pos(e_pos), door_type, i)
+                    pg.time.delay(100)
+                    pg.display.update(c.ACT_RECT)
+
+                # 更新地图数据
+                self.now_map.update_layer(e_pos, c.MAP_B_STONE)
+            else:
+                print("you don't have key")
+        elif door_type == c.MAP_DOOR_BLUE:
+            if self.now_hero.ITEMS["b_key"] > 0:
+                self.now_hero.ITEMS["b_key"] -= 1
+                self.now_shower.fresh_item_pane()
+                pg.display.update(c.ITEM_RECT)
+
+                for i in range(4):
+                    self.now_shower.fresh_open(Tool.change_xy_pos(e_pos), door_type, i)
+                    pg.time.delay(100)
+                    pg.display.update(c.ACT_RECT)
+
+                # 更新地图数据
+                self.now_map.update_layer(e_pos, c.MAP_B_STONE)
+            else:
+                print("you don't have key")
+
 
     # 楼层移动
     def to_up(self):
@@ -284,7 +324,7 @@ class Control(State):
                         self.key_direct = c.KEY_RIGHT
                         self.to_touch()
 
-        pg.time.delay(200)
+        pg.time.delay(100)
         pg.display.update()
 
     def main(self):
@@ -292,8 +332,8 @@ class Control(State):
         self.init_State()
         # 绘制静态层
         self.now_shower.draw_sta_pane()
-        self.now_shower.fresh_hero_atr()
-        self.now_shower.fresh_item()
+        self.now_shower.fresh_hero_pane()
+        self.now_shower.fresh_item_pane()
         pg.display.update()
 
         # 动态绘制

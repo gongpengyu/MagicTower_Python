@@ -42,10 +42,23 @@ class CreatureList():
                     mons = Slime(self.ar_list["slime_red"])
                     m_pos = (j, i)
                     mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_BATF:
+                    mons = Bat(self.ar_list["bat_first"])
+                    m_pos = (j,i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_SKULLF:
+                    mons = Skull(self.ar_list["skull_first"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_MUMMYF:
+                    mons = Mummy(self.ar_list["mummy_first"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
                 elif layer[j][i] == c.MAP_NPC_RED:
                     npc = Npc(self.npc_list["npc_red_1"])
                     n_pos = (j, i)
                     mons_list.append([n_pos, npc])
+
         self.creature_list.append(mons_list)
 
     # 查找怪物,返回该层怪物列表中的索引号

@@ -43,7 +43,8 @@ HERO_RECT = (HERO_POINTX, HERO_POINTY, HERO_WIDTH, HERO_HEIGHT)
 # 人物参数
 HERO_STA = {
     "normal": "正常",
-    "weak": "虚弱"
+    "weak": "虚弱",
+    "poison": "中毒"
 }
 
 # 物品区参数
@@ -78,6 +79,7 @@ MAP_DOWN_FLO = 4
 MAP_IRON_RAIL = 5
 MAP_DOOR_YELLOW = 6
 MAP_DOOR_BLUE = 7
+MAP_DOOR_RED = 8
 # 40-60 为怪物区
 MAP_MONS_SG = 40
 MAP_MONS_SR = 41
@@ -227,16 +229,16 @@ DOOR_YELLOW_IMG = {
     "sta_rect": (0, 0, 32, 32),
     "sta_wh_g": (1, 1),
     "dyn_rect": (0, 0, 32, 128),
-    "dyn_wh_g": (4, 1)
+    "dyn_wh_g": (1, 4)
 }
 DOOR_BLUE_IMG = {
     "super": EVENT_DOOR,
-    "pointx": 0,
+    "pointx": 32,
     "pointy": 0,
-    "sta_rect": (0, 0, 32, 32),
+    "sta_rect": (32, 0, 32, 32),
     "sta_wh_g": (1, 1),
-    "dyn_rect": (0, 0, 32, 128),
-    "dyn_wh_g": (4, 1)
+    "dyn_rect": (32, 0, 32, 128),
+    "dyn_wh_g": (1, 4)
 }
 
 MONS_SLING_IMG = {
