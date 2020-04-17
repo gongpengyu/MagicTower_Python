@@ -1,6 +1,55 @@
 {
-  "npc_red_1":{
-    "talk_w": "again?#you desperate people really don't afraid dead# hihihi",
-    "items": {}
-  }
+  "layer_0": [
+    {
+      "pos": [1,10],
+      "word": [
+        "又是挑战者吗？",
+        "希望你能够活着回去，",
+        "不用担心，我会帮你收尸的"
+      ],
+      "n_items": [
+        {
+          "name": "red_gem",
+          "cost": "coin",
+          "how_much": 20
+        },
+        {
+          "name": "blue_gem",
+          "cost": "exp",
+          "how_much": 10
+        }
+      ]
+    }
+  ],
+  "layer_1": [
+    {
+      "pos": [1,1],
+      "word": [
+        "听说这座塔不止20层",
+        "但是最高只能走到20层",
+        "真的叫人头疼"
+      ],
+      "n_items": ""
+    },
+    {
+      "pos": [10, 8],
+      "word": [
+        "你知道什么是徽章吗?",
+        "塔中有不同的徽章，拿到后",
+        "对你的旅程会有所帮助的。"
+      ],
+      "n_items": ""
+    }
+  ],
+  "layer_2": [
+    {
+      "pos": [1,3],
+      "word": [
+        "你认识那个被抓住的盗贼吗?",
+        "听说他来这里是为了找一个",
+        "锄头，不知道他来这鬼地方作甚.."
+      ],
+      "n_items": ""
+    }
+  ]
 }

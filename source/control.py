@@ -4,6 +4,8 @@ from .shower import Shower
 from .com.creature import CreatureList
 from . import constants as c
 from .tool import Tool
+from .com import items
+from .com.npc import NpcList
 # state用于存储重要的状态
 import pygame as pg
 
@@ -19,6 +21,8 @@ class State():
         self.pos = None
         # 存储待战斗的怪物
         self.mons_list = None
+        # 存储npc的数据
+        self.npc_list = None
         # 储存shower
         self.now_shower = None
         # 指示主角朝向
@@ -39,7 +43,8 @@ class Control(State):
         self.now_hero = Hero()
         self.pos = [6, 12]
         self.mons_list = CreatureList()
-        self.mons_list.init_layer_creature(self.now_map.now_layer())
+        self.mons_list.init_layer_mons(self.now_map.now_layer())
+        self.npc_list = NpcList()
 
         self.now_shower = Shower()
         # 绑定用于展示的数据
@@ -66,15 +71,20 @@ class Control(State):
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif data[pos[1]-1][pos[0]] == c.MAP_NPC_RED:
+            elif c.MAP_NPC_RED <= data[pos[1]-1][pos[0]] <= c.MAP_NPC_M:
                 n_pos = (pos[1]-1, pos[0])
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
-            elif c.MAP_IRON_RAIL <= data[pos[1]-1][pos[0]] <= c.MAP_DOOR_RED :
+            elif c.MAP_IRON_RAIL <= data[pos[1]-1][pos[0]] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1]-1, pos[0]]
                 self.to_open(e_pos)
+            elif c.MAP_ITEM_RM <= data[pos[1]-1][pos[0]] <= c.MAP_ITEM_M:
+                e_pos = [pos[1]-1, pos[0]]
+                self.to_get_item(e_pos)
             elif data[pos[1]-1][pos[0]] == c.MAP_UP_FLO:
                 self.to_up()
+            elif data[pos[1]-1][pos[0]] == c.MAP_DOWN_FLO:
+                self.to_down()
         elif key == c.KEY_DOWN:
             if (pos[1]+1 >= h_g) or (data[pos[1]+1][pos[0]] == c.MAP_W_STONE):
                 self.to_stop()
@@ -87,15 +97,20 @@ class Control(State):
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif data[pos[1]+1][pos[0]] == c.MAP_NPC_RED:
+            elif c.MAP_NPC_RED <= data[pos[1] + 1][pos[0]] <= c.MAP_NPC_M:
                 n_pos = (pos[1]+1, pos[0])
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
             elif c.MAP_IRON_RAIL <= data[pos[1]+1][pos[0]] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1]+1, pos[0]]
                 self.to_open(e_pos)
+            elif c.MAP_ITEM_RM <= data[pos[1]+1][pos[0]] <= c.MAP_ITEM_M:
+                e_pos = [pos[1]+1, pos[0]]
+                self.to_get_item(e_pos)
             elif data[pos[1]+1][pos[0]] == c.MAP_UP_FLO:
                 self.to_up()
+            elif data[pos[1]+1][pos[0]] == c.MAP_DOWN_FLO:
+                self.to_down()
         elif key == c.KEY_LEFT:
             if (pos[0]-1 < 0) or (data[pos[1]][pos[0]-1] == c.MAP_W_STONE):
                 self.to_stop()
@@ -108,15 +123,20 @@ class Control(State):
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif data[pos[1]][pos[0]-1] == c.MAP_NPC_RED:
+            elif c.MAP_NPC_RED <= data[pos[1]][pos[0] - 1] <= c.MAP_NPC_M:
                 n_pos = (pos[1], pos[0]-1)
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
             elif c.MAP_IRON_RAIL <= data[pos[1]][pos[0]-1] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1], pos[0]-1]
                 self.to_open(e_pos)
+            elif c.MAP_ITEM_RM <= data[pos[1]][pos[0]-1] <= c.MAP_ITEM_M:
+                e_pos = [pos[1], pos[0]-1]
+                self.to_get_item(e_pos)
             elif data[pos[1]][pos[0]-1] == c.MAP_UP_FLO:
                 self.to_up()
+            elif data[pos[1]][pos[0]-1] == c.MAP_DOWN_FLO:
+                self.to_down()
         elif key == c.KEY_RIGHT:
             if (pos[0]+1 >= w_g) or (data[pos[1]][pos[0]+1] == c.MAP_W_STONE):
                 self.to_stop()
@@ -129,15 +149,20 @@ class Control(State):
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif data[pos[1]][pos[0]+1] == c.MAP_NPC_RED:
+            elif c.MAP_NPC_RED <= data[pos[1]][pos[0] + 1] <= c.MAP_NPC_M:
                 n_pos = (pos[1], pos[0]+1)
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
             elif c.MAP_IRON_RAIL <= data[pos[1]][pos[0]+1] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1], pos[0]+1]
                 self.to_open(e_pos)
+            elif c.MAP_ITEM_RM <= data[pos[1]][pos[0]+1] <= c.MAP_ITEM_M:
+                e_pos = [pos[1], pos[0]+1]
+                self.to_get_item(e_pos)
             elif data[pos[1]][pos[0]+1] == c.MAP_UP_FLO:
                 self.to_up()
+            elif data[pos[1]][pos[0]+1] == c.MAP_DOWN_FLO:
+                self.to_down()
     # 控制角色的移动
     def to_move(self):
         key = self.key_direct
@@ -212,6 +237,8 @@ class Control(State):
 
         # 处理战败的对象
         if mons.HP <= 0:
+            # 将战利品给予hero
+            mons.give_items(hero)
             self.mons_list.delete_mons(self.now_map.get_now_index(), pos)
             # 修改地图映射
             self.now_map.update_layer(pos, c.MAP_B_STONE)
@@ -225,8 +252,65 @@ class Control(State):
     # 角色交易
     def to_trade(self, pos):
         print("to trade")
-        npc = self.mons_list.get_mons(self.now_map.get_now_index(), pos)
-        npc.to_talk()
+        self.npc_list.set_npc(self.now_map.get_now_index(), pos)
+        npc_data = self.npc_list.now_npc
+
+        if npc_data["n_items"] == "":
+            print("just talk")
+            self.npc_list.talk()
+            # 展示talk面板
+            self.now_shower.fresh_talk_pane(npc_data["word"])
+            pg.display.update()
+
+            talk_event = True
+            while talk_event:
+                for event in pg.event.get():
+                    if event.type == pg.KEYDOWN:
+                        keys = pg.key.get_pressed()
+                        if keys[pg.K_SPACE]:
+                            print("you print enter")
+                            talk_event = False
+
+        else:
+            self.npc_list.talk()
+            self.now_shower.fresh_talk_pane(npc_data["word"])
+
+            # 通过key事件控制,k_index指示位置
+            trade_event = True
+            k_index = 0
+            while trade_event:
+                for event in pg.event.get():
+                    if event.type == pg.KEYDOWN:
+                        keys = pg.key.get_pressed()
+                        if keys[pg.K_UP]:
+                            if k_index - 1 < 0:
+                                pass
+                            else:
+                                k_index -= 1
+                        elif keys[pg.K_DOWN]:
+                            if k_index + 1 > 2:
+                                pass
+                            else:
+                                k_index += 1
+                        elif keys[pg.K_z]:
+                            print("enter z")
+                            # 表示要购买该物资了
+                            buy_item = npc_data["n_items"][k_index]
+                            self.npc_list.trade(buy_item, self.now_hero)
+
+                            # 刷新页面状态
+                            self.now_shower.fresh_hero_pane()
+                            self.now_shower.fresh_item_pane()
+
+                            trade_event = False
+                        elif keys[pg.K_SPACE]:
+                            trade_event = False
+                # 动画展示
+                self.now_shower.fresh_trade_pane(npc_data["n_items"], k_index)
+                pg.display.update()
+
+            print("test")
+
         print("finish trade")
 
 
@@ -282,6 +366,43 @@ class Control(State):
             else:
                 print("you don't have key")
 
+    # 获取物品,物品位置
+    def to_get_item(self, e_pos):
+        get_item_event = True
+        # 根据物品类型执行相相应效果
+        item_val = self.now_map.get_value_nowlayer(e_pos)
+        if item_val == c.MAP_ITEM_YK:
+            self.now_hero.ITEMS["y_key"] += 1
+            txt = "y_key: +1"
+        elif item_val == c.MAP_ITEM_BK:
+            self.now_hero.ITEMS["b_key"] += 1
+            txt = "b_key: +1"
+        elif item_val == c.MAP_ITEM_RK:
+            self.now_hero.ITEMS["r_key"] += 1
+            txt = "r_key: +1"
+        elif item_val == c.MAP_ITEM_RM:
+            txt = self.now_hero.use_item(items.ITEM_RED_MEDICINE)
+        elif item_val == c.MAP_ITEM_RG:
+            txt = self.now_hero.use_item(items.ITEM_RED_GEM)
+        elif item_val == c.MAP_ITEM_BG:
+            txt = self.now_hero.use_item(items.ITEM_BLUE_GEM)
+
+        # 展示动画
+        while get_item_event:
+            self.now_shower.fresh_get_pane(txt)
+            pg.display.update()
+
+            for event in pg.event.get():
+                if event.type == pg.KEYDOWN:
+                    keys = pg.key.get_pressed()
+                    if keys[pg.K_SPACE]:
+                        print("you print enter")
+                        get_item_event = False
+
+        # 恢复原状
+        self.now_map.update_layer(e_pos, c.MAP_B_STONE)
+        self.now_shower.update_all(self.pos, self.key_direct)
+
 
     # 楼层移动
     def to_up(self):
@@ -294,8 +415,19 @@ class Control(State):
         self.now_shower.set_data(next_l)
         self.now_shower.l_count = Tool.animate_count(4)
         # 更新mons_list的数据
-        self.mons_list.init_layer_creature(self.now_map.now_layer())
+        self.mons_list.init_layer_mons(self.now_map.now_layer())
         print("test")
+
+    # 下楼
+    def to_down(self):
+        # 强行让主距沿着该方向移动一步
+        self.to_move()
+        # 接着返回前一层
+        print("pre layer")
+        pre_l = self.now_map.pre_layer()
+        # 更新shower数据
+        self.now_shower.set_data(pre_l)
+        self.now_shower.l_count = Tool.animate_count(4)
 
 
 

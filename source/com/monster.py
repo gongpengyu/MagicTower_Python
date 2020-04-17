@@ -11,11 +11,17 @@ class Monster():
 
     def attack(self, hero):
         pass
+    def give_item(self, hero):
+        pass
 
 class Slime(Monster):
-    def __init__(self, dict):
-        Monster.__init__(self, dict["hp"], dict["atk"], dict["defend"], dict["agi"])
-        self.NAME = dict["name"]
+    def __init__(self, m_dict):
+        Monster.__init__(self, m_dict["hp"], m_dict["atk"], m_dict["defend"], m_dict["agi"])
+        self.NAME = m_dict["name"]
+        self.ITEMS = {
+            "exp": m_dict["exp"],
+            "coin": m_dict["coin"]
+        }
 
     # def sayHello(self):
     #     print("hp:",self.HP,"atk:",self.ATK)
@@ -23,14 +29,24 @@ class Slime(Monster):
     def attack(self, hero):
         # 先计算slime造成的实际伤害
         damage = (self.ATK - hero.DEF)
-        damage = round(damage, 2)
+        damage = round(damage)
         # 对hero进行伤害计算
         hero.HP = hero.HP - damage
 
+    def give_items(self, hero):
+        # 将怪物身上物品交与主角
+        hero.EXP += self.ITEMS["exp"]
+        hero.ITEMS["coin"] += self.ITEMS["coin"]
+
+
 class Bat(Monster):
-    def __init__(self, dict):
-        Monster.__init__(self, dict["hp"], dict["atk"], dict["defend"], dict["agi"])
-        self.NAME = dict["name"]
+    def __init__(self, m_dict):
+        Monster.__init__(self, m_dict["hp"], m_dict["atk"], m_dict["defend"], m_dict["agi"])
+        self.NAME = m_dict["name"]
+        self.ITEMS = {
+            "exp": m_dict["exp"],
+            "coin": m_dict["coin"]
+        }
 
     def attack(self, hero):
         # 根据根据二者敏捷度进行判断，如果hero敏捷大于怪物，其回避率为其敏捷值
@@ -48,10 +64,15 @@ class Bat(Monster):
                 damage = 0
             else:
                 damage = (self.ATK - hero.DEF)
-                damage = round(damage, 2)
+                damage = round(damage)
 
         # 对hero进行伤害计算
         hero.HP = hero.HP - damage
+
+    def give_items(self, hero):
+        # 将怪物身上物品交与主角
+        hero.EXP += self.ITEMS["exp"]
+        hero.ITEMS["coin"] += self.ITEMS["coin"]
 
 
 class Skull(Monster):
@@ -59,6 +80,10 @@ class Skull(Monster):
         Monster.__init__(self, m_dict["hp"], m_dict["atk"], m_dict["defend"], m_dict["agi"])
         self.NAME = m_dict["name"]
         self.WEAK_HIT = m_dict["weak_hit"]
+        self.ITEMS = {
+            "exp": m_dict["exp"],
+            "coin": m_dict["coin"]
+        }
 
     def attack(self, hero):
         # 先算回避值
@@ -82,18 +107,27 @@ class Skull(Monster):
                 damage = 0
             else:
                 damage = (self.ATK - hero.DEF)
-                damage = round(damage, 2)
+                damage = round(damage)
         else:
             damage = 0
 
         # 对hero进行伤害计算
         hero.HP = hero.HP - damage
 
+    def give_items(self, hero):
+        # 将怪物身上物品交与主角
+        hero.EXP += self.ITEMS["exp"]
+        hero.ITEMS["coin"] += self.ITEMS["coin"]
+
 class Mummy(Monster):
     def __init__(self, m_dict):
         Monster.__init__(self, m_dict["hp"], m_dict["atk"], m_dict["defend"], m_dict["agi"])
         self.NAME = m_dict["name"]
         self.POI_HIT = m_dict["poison_hit"]
+        self.ITEMS = {
+            "exp": m_dict["exp"],
+            "coin": m_dict["coin"]
+        }
 
     def attack(self, hero):
         # 先算回避值
@@ -118,10 +152,15 @@ class Mummy(Monster):
                 damage = 0
             else:
                 damage = (self.ATK - hero.DEF)
-                damage = round(damage, 2)
+                damage = round(damage)
         else:
             damage = 0
 
         # 对hero进行伤害计算
         hero.HP = hero.HP - damage
+
+    def give_items(self, hero):
+        # 将怪物身上物品交与主角
+        hero.EXP += self.ITEMS["exp"]
+        hero.ITEMS["coin"] += self.ITEMS["coin"]
 

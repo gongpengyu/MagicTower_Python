@@ -4,14 +4,18 @@
     "hp": 40,
     "atk": 18,
     "defend": 1,
-    "agi": 0
+    "agi": 0,
+    "exp": 1,
+    "coin": 1
   },
   "slime_red": {
     "name": "slime-red",
     "hp": 50,
     "atk": 20,
     "defend": 4,
-    "agi": 0
+    "agi": 0,
+    "exp": 1,
+    "coin": 2
   },
   "slime_black": {
     "name": "slime-black",
@@ -25,7 +29,9 @@
     "hp": 50,
     "atk": 32,
     "defend": 2,
-    "agi": 4
+    "agi": 4,
+    "exp": 1,
+    "coin": 3
   },
   "skull_first": {
     "name": "skull-first",
@@ -33,7 +39,9 @@
     "atk": 70,
     "defend": 0,
     "agi": 3,
-    "weak_hit": 50
+    "weak_hit": 50,
+    "exp": 1,
+    "coin": 5
   },
   "mummy_first": {
     "name": "mummy-first",
@@ -41,7 +49,9 @@
     "atk": 90,
     "defend": 33,
     "agi": 2,
-    "poison_hit": 99
+    "poison_hit": 99,
+    "exp": 3,
+    "coin": 10
   }
 
 }

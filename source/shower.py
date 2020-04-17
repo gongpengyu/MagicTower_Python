@@ -49,6 +49,7 @@ class ImgList():
             "monster_bf_s": self.get_static_img(c.MONS_BATF_IMG),
             "monster_skullf_s": self.get_static_img(c.MONS_SKULLF_IMG),
             "monster_mummyf_s": self.get_static_img(c.MONS_MUMMYF_IMG),
+            "arrow_r_s": self.get_static_img(c.ARROW_R_IMG),
             "magma_d": self.get_dynamic_img(c.MAGMA_IMG),
             "iron_rail_d": self.get_dynamic_img(c.IRON_RAIL_IMG),
             "hero_up_d": self.get_dynamic_img(c.HERO_UP_IMG),
@@ -468,6 +469,53 @@ class Shower():
         surface.blit(def_h, (9 * c.PIXEL_GRID + c.ATKPANE_REL, 4 * c.PIXEL_GRID + c.ATKPANE_REL))
         surface.blit(agi_h, (9 * c.PIXEL_GRID + c.ATKPANE_REL, 5 * c.PIXEL_GRID + c.ATKPANE_REL))
 
+        if mons.HP <= 0:
+            # 展示战利品
+            item_txt = "Get: exp: " + str(mons.ITEMS["exp"]) + ", coin:" + str(mons.ITEMS["coin"])
+            surface.blit(self.img_list.get_sta_txt(item_txt, "small"),
+                         (0 * c.PIXEL_GRID + c.ATKPANE_REL, 6 * c.PIXEL_GRID + c.ATKPANE_REL))
+
+    def fresh_get_pane(self, txt):
+        surface = self.screen.subsurface(c.GETPANE_RECT)
+
+        # 刷新背板
+        self.show_background([c.GETPANE_W_G, c.GETPANE_H_G], self.img_list.get_img("b_stone_s"), surface)
+
+        # 绘制状态
+        txt_i = self.img_list.get_sta_txt(txt, "small")
+        surface.blit(txt_i, (0, 1*c.PIXEL_GRID))
+
+    # 展示对话面板
+    def fresh_talk_pane(self, talk_txt):
+        surface = self.screen.subsurface(c.TALKPANE_RECT)
+        title = self.img_list.get_sta_txt("TALK:", "small")
+
+        # 刷新背板
+        self.show_background([c.TALKPANE_W_G, c.TALKPANE_H_G], self.img_list.get_img("b_stone_s"), surface)
+        pass
+        # 绘制状态
+        surface.blit(title, (1*c.PIXEL_GRID, 1*c.PIXEL_GRID))
+        for i in range(3):
+            txt_s = self.img_list.get_sta_txt(talk_txt[i], "small")
+            surface.blit(txt_s, (1 * c.PIXEL_GRID, (2 + i) * c.PIXEL_GRID))
+
+    # index指示箭头位置
+    def fresh_trade_pane(self, ni_list, index):
+        surface = self.screen.subsurface(c.TRAPANE_RECT)
+        ni_l = len(ni_list)
+        title = self.img_list.get_sta_txt("TRADE:", "small")
+
+        # 刷新背板
+        self.show_background([c.TRAPANE_W_G, c.TRAPANE_H_G], self.img_list.get_img("b_stone_s"), surface)
+
+        # 绘制状态
+        surface.blit(title, (1*c.PIXEL_GRID, 0))
+        surface.blit(self.img_list.get_img("arrow_r_s"), (0*c.PIXEL_GRID, (1+index)*c.PIXEL_GRID))
+        # 展示可选项
+        for i in range(ni_l):
+            str_item = ni_list[i]["name"] + " cost: " + ni_list[i]["cost"]+","+str(ni_list[i]["how_much"])
+            txt_i = self.img_list.get_sta_txt(str_item, "small")
+            surface.blit(txt_i, (1*c.PIXEL_GRID, (1+i)*c.PIXEL_GRID))
 
 
 

@@ -1,6 +1,7 @@
 from . import items
 from .. import constants as c
 
+
 import random
 # 负责主角的逻辑处理
 class Hero():
@@ -17,7 +18,7 @@ class Hero():
             "y_key": 1,
             "b_key": 1,
             "r_key": 1,
-            "coin": 1
+            "coin": 100
         }
         self.temp_data = {}
 
@@ -37,7 +38,7 @@ class Hero():
                 damage = 0
             else:
                 damage = (self.ATK - monster.DEF)
-                damage = round(damage, 2)
+                damage = round(damage)
 
         # 追加伤害
         monster.HP = monster.HP - damage
@@ -79,29 +80,40 @@ class Hero():
 
         self.STATE = c.HERO_STA["normal"]
 
-    def get_item(self, item_dict):
-        self.ITEMS[item_dict["name"]] = item_dict
-    def use_item(self, item_name):
-        t_item = self.ITEMS[item_name]
+    # name表示从商店购买的货物名称
+    def use_trade_item(self, name):
+        if name == "red_gem":
+            self.use_item(items.ITEM_RED_GEM)
+        elif name == "blue_gem":
+            self.use_item(items.ITEM_BLUE_GEM)
+
+    def use_item(self, item_dict):
+        # 记录效果
+        txt = ""
         # 确定使用那种效果
-        if t_item["exist"]:
+        if item_dict["exist"]:
             # 非快消品，另外考虑
             pass
         else:
             # 快消品直接使用
-            for key in t_item:
+            for key in item_dict:
                 if key == "add_hp":
                     # 加血
-                    self.HP += t_item[key]
+                    self.HP += item_dict[key]
+                    txt = txt + key + ": " + str(item_dict[key]) + ";"
                 elif key == "add_atk":
                     # 加atk
-                    self.ATK += t_item[key]
+                    self.ATK += item_dict[key]
+                    txt = txt + key + ": " + str(item_dict[key]) + ";"
                 elif key == "add_def":
                     # 加def
-                    self.DEF += t_item[key]
+                    self.DEF += item_dict[key]
+                    txt = txt + key + ": " + str(item_dict[key]) + ";"
                 elif key == "add_agi":
                     # 加agi
-                    self.AGI += t_item[key]
+                    self.AGI += item_dict[key]
+                    txt = txt + key + ": " + str(item_dict[key]) + ";"
+        return txt
 
     def print_hero(self):
         print("hp:", self.HP)

@@ -1,6 +1,5 @@
 from .. import constants as c
 from .monster import *
-from .npc import *
 
 import os
 import json
@@ -10,9 +9,7 @@ import json
 class CreatureList():
     def __init__(self):
         self.mons_path = os.path.join("source", "data", "monster.json")
-        self.npc_path = os.path.join("source", "data", "npc.json")
         self.ar_list = {}
-        self.npc_list = {}
         self.creature_list = []
         # 初始化
         self.init_arlist()
@@ -20,11 +17,8 @@ class CreatureList():
     def init_arlist(self):
         with open(self.mons_path, "r") as f:
             self.ar_list = json.load(f)
-        with open(self.npc_path, "r", errors="ignore") as f2:
-            self.npc_list = json.load(f2)
-            print("test")
 
-    def init_layer_creature(self, layer):
+    def init_layer_mons(self, layer):
         # 获取当前该图层信息
         h_g = len(layer)
         w_g = len(layer[0])
@@ -54,12 +48,9 @@ class CreatureList():
                     mons = Mummy(self.ar_list["mummy_first"])
                     m_pos = (j, i)
                     mons_list.append([m_pos, mons])
-                elif layer[j][i] == c.MAP_NPC_RED:
-                    npc = Npc(self.npc_list["npc_red_1"])
-                    n_pos = (j, i)
-                    mons_list.append([n_pos, npc])
 
         self.creature_list.append(mons_list)
+
 
     # 查找怪物,返回该层怪物列表中的索引号
     def find_mons(self, index, pos):

@@ -1,11 +1,47 @@
-class Npc():
-    def __init__(self, t_dict):
-        self.talk_word = t_dict["talk_w"]
-        self.have_item = t_dict["items"]
+import os
+import json
+class NpcList():
+    def __init__(self):
+        self.npc_path = os.path.join("source", "data", "npc.json")
+        self.data_list = None
+        self.now_npc = None
 
-    def to_talk(self):
-        # 对获得文本处理
-        speak_list = self.talk_word.split("#")
-        # 循环输出
-        for x in speak_list:
+        self.init_list()
+
+
+    def init_list(self):
+        with open(self.npc_path, "rb") as f:
+            data_str = f.read().decode("utf-8")
+            self.data_list = json.loads(data_str)
+            print("test")
+
+    def set_npc(self, index, pos):
+        s_index = "layer_" + str(index)
+        layer_data = self.data_list[s_index]
+        for x in layer_data:
+            if x["pos"][0] == pos[0] and x["pos"][1] == pos[1]:
+                self.now_npc = x
+
+    def talk(self):
+        word = self.now_npc["word"]
+        for x in word:
             print(x)
+
+    # item_price为含有商品价格的dict
+    def trade(self, item_price, hero):
+        if item_price["cost"] == "coin":
+            if hero.ITEMS["coin"] < item_price["how_much"]:
+                return False
+            else:
+                hero.ITEMS["coin"] -= item_price["how_much"]
+                hero.use_trade_item(item_price["name"])
+                return True
+        elif item_price["cost"] == "exp":
+            if hero.EXP < item_price["how_much"]:
+                return False
+            else:
+                hero.EXP -= item_price["how_much"]
+                hero.use_trade_item(item_price["name"])
+                return True
+
+
