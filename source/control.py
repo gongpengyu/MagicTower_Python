@@ -66,12 +66,12 @@ class Control(State):
             elif data[pos[1]-1][pos[0]] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_UP
-            elif c.MAP_MONS_SG <= data[pos[1] - 1][pos[0]] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_WZF <= data[pos[1] - 1][pos[0]] <= c.MAP_MONS_M:
                 m_pos = (pos[1]-1, pos[0])
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif c.MAP_NPC_RED <= data[pos[1]-1][pos[0]] <= c.MAP_NPC_M:
+            elif c.MAP_NPC_RED <= data[pos[1]-1][pos[0]] <= c.MAP_NPC_M or data[pos[1]-1][pos[0]] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1]-1, pos[0])
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
@@ -92,12 +92,12 @@ class Control(State):
             elif data[pos[1]+1][pos[0]] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_DOWN
-            elif c.MAP_MONS_SG <= data[pos[1] + 1][pos[0]] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_WZF <= data[pos[1] + 1][pos[0]] <= c.MAP_MONS_M:
                 m_pos = (pos[1]+1, pos[0])
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif c.MAP_NPC_RED <= data[pos[1] + 1][pos[0]] <= c.MAP_NPC_M:
+            elif c.MAP_NPC_RED <= data[pos[1] + 1][pos[0]] <= c.MAP_NPC_M or data[pos[1] + 1][pos[0]] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1]+1, pos[0])
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
@@ -118,12 +118,12 @@ class Control(State):
             elif data[pos[1]][pos[0]-1] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_LEFT
-            elif c.MAP_MONS_SG <= data[pos[1]][pos[0] - 1] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_WZF <= data[pos[1]][pos[0] - 1] <= c.MAP_MONS_M:
                 m_pos = (pos[1], pos[0]-1)
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif c.MAP_NPC_RED <= data[pos[1]][pos[0] - 1] <= c.MAP_NPC_M:
+            elif c.MAP_NPC_RED <= data[pos[1]][pos[0] - 1] <= c.MAP_NPC_M or data[pos[1]][pos[0] - 1] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1], pos[0]-1)
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
@@ -144,12 +144,12 @@ class Control(State):
             elif data[pos[1]][pos[0]+1] == c.MAP_B_STONE:
                 self.to_move()
                 return c.KEY_RIGHT
-            elif c.MAP_MONS_SG <= data[pos[1]][pos[0] + 1] <= c.MAP_MONS_M:
+            elif c.MAP_MONS_WZF <= data[pos[1]][pos[0] + 1] <= c.MAP_MONS_M:
                 m_pos = (pos[1], pos[0]+1)
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
                 return c.KEY_TOATK
-            elif c.MAP_NPC_RED <= data[pos[1]][pos[0] + 1] <= c.MAP_NPC_M:
+            elif c.MAP_NPC_RED <= data[pos[1]][pos[0] + 1] <= c.MAP_NPC_M or data[pos[1]][pos[0] + 1] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1], pos[0]+1)
                 self.to_trade(n_pos)
                 return c.KEY_TRADE
@@ -296,7 +296,16 @@ class Control(State):
                             print("enter z")
                             # 表示要购买该物资了
                             buy_item = npc_data["n_items"][k_index]
-                            self.npc_list.trade(buy_item, self.now_hero)
+                            trade_finished = self.npc_list.trade(buy_item, self.now_hero)
+
+                            if trade_finished:
+                                # 针对神明特殊处理
+                                if buy_item["name"] == "god_hp":
+                                    self.npc_list.up_price(npc_data["n_items"], 1)
+                                elif buy_item["name"] == "god_atk":
+                                    self.npc_list.up_price(npc_data["n_items"], 1)
+                                elif buy_item["name"] == "god_def":
+                                    self.npc_list.up_price(npc_data["n_items"], 1)
 
                             # 刷新页面状态
                             self.now_shower.fresh_hero_pane()
@@ -365,7 +374,20 @@ class Control(State):
                 self.now_map.update_layer(e_pos, c.MAP_B_STONE)
             else:
                 print("you don't have key")
+        elif door_type == c.MAP_DOOR_RED:
+            if self.now_hero.ITEMS["r_key"] > 0:
+                self.now_hero.ITEMS["r_key"] -= 1
+                self.now_shower.fresh_item_pane()
+                pg.display.update(c.ITEM_RECT)
 
+                for i in range(4):
+                    self.now_shower.fresh_open(Tool.change_xy_pos(e_pos), door_type, i)
+                    pg.time.delay(100)
+                    pg.display.update(c.ACT_RECT)
+
+                self.now_map.update_layer(e_pos, c.MAP_B_STONE)
+            else:
+                print("you don't have key")
     # 获取物品,物品位置
     def to_get_item(self, e_pos):
         get_item_event = True
@@ -382,10 +404,26 @@ class Control(State):
             txt = "r_key: +1"
         elif item_val == c.MAP_ITEM_RM:
             txt = self.now_hero.use_item(items.ITEM_RED_MEDICINE)
+        elif item_val == c.MAP_ITEM_BM:
+            txt = self.now_hero.use_item(items.ITEM_BLUE_MEDICINE)
         elif item_val == c.MAP_ITEM_RG:
             txt = self.now_hero.use_item(items.ITEM_RED_GEM)
         elif item_val == c.MAP_ITEM_BG:
             txt = self.now_hero.use_item(items.ITEM_BLUE_GEM)
+        elif item_val == c.MAP_ITEM_AG:
+            txt = self.now_hero.use_item(items.ITEM_AGI_GEM)
+        elif item_val == c.MAP_ITEM_RW:
+            txt = self.now_hero.use_item(items.ITEM_WEAK_RETURN)
+        elif item_val == c.MAP_ITEM_RP:
+            txt = self.now_hero.use_item(items.ITEM_POISON_RETURN)
+        elif item_val == c.MAP_ITEM_IS:
+            txt = self.now_hero.use_item(items.ITEM_IRON_SWORD)
+        elif item_val == c.MAP_ITEM_SS:
+            txt = self.now_hero.use_item(items.ITEM_SILVER_SWORD)
+        elif item_val == c.MAP_ITEM_IE:
+            txt = self.now_hero.use_item(items.ITEM_IRON_EQUIP)
+        elif item_val == c.MAP_ITEM_UL:
+            txt = self.now_hero.use_item(items.ITEM_UP_LEVEL)
 
         # 展示动画
         while get_item_event:
@@ -413,6 +451,8 @@ class Control(State):
         next_l = self.now_map.next_layer()
         # 更新shower的数据
         self.now_shower.set_data(next_l)
+        self.now_shower.set_layer_index(self.now_map.get_now_index())
+        self.now_shower.fresh_title()
         self.now_shower.l_count = Tool.animate_count(4)
         # 更新mons_list的数据
         self.mons_list.init_layer_mons(self.now_map.now_layer())
@@ -427,6 +467,8 @@ class Control(State):
         pre_l = self.now_map.pre_layer()
         # 更新shower数据
         self.now_shower.set_data(pre_l)
+        self.now_shower.set_layer_index(self.now_map.get_now_index())
+        self.now_shower.fresh_title()
         self.now_shower.l_count = Tool.animate_count(4)
 
 
@@ -466,6 +508,7 @@ class Control(State):
         self.now_shower.draw_sta_pane()
         self.now_shower.fresh_hero_pane()
         self.now_shower.fresh_item_pane()
+        self.now_shower.fresh_title()
         pg.display.update()
 
         # 动态绘制

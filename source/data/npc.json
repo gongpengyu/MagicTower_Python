@@ -51,5 +51,32 @@
       ],
       "n_items": ""
     }
+  ],
+  "layer_3": [
+    {
+      "pos": [8, 3],
+      "word": [
+        "这位路过的小哥？",
+        "要不要考虑买点什么？",
+        ""
+      ],
+      "n_items": [
+        {
+          "name": "god_hp",
+          "cost": "coin",
+          "how_much": 20
+        },
+        {
+          "name": "god_atk",
+          "cost": "coin",
+          "how_much": 20
+        },
+        {
+          "name": "god_def",
+          "cost": "coin",
+          "how_much": 20
+        }
+      ]
+    }
   ]
 }

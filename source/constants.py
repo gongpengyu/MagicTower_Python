@@ -8,6 +8,7 @@ L_G_POINTX = 12
 L_G_POINTY = 0
 L_W_G = 2
 L_H_G = 1
+L_RECT = (L_G_POINTX*PIXEL_GRID, L_G_POINTY*PIXEL_GRID, L_W_G*PIXEL_GRID, L_H_G*PIXEL_GRID)
 
 # 总界面screen参数
 SCREEN_G_POINTX = 0
@@ -112,24 +113,49 @@ MAP_IRON_RAIL = 5
 MAP_DOOR_YELLOW = 6
 MAP_DOOR_BLUE = 7
 MAP_DOOR_RED = 8
-# 40-60 为怪物区
+MAP_GOD_LEFT = 9
+MAP_GOD_CENTER = 10
+MAP_GOD_RIGHT = 11
+
+# 30-60 为怪物区
+MAP_MONS_WZF = 30
+MAP_MONS_WZS = 31
 MAP_MONS_SG = 40
 MAP_MONS_SR = 41
+MAP_MONS_SB = 42
 MAP_MONS_BATF = 45
+MAP_MONS_BATS = 46
+MAP_MONS_BATT = 47
 MAP_MONS_SKULLF = 50
+MAP_MONS_SKULLS = 51
+MAP_MONS_SKULLT = 52
 MAP_MONS_MUMMYF = 55
+MAP_MONS_SLIMEH = 56
+MAP_MONS_NIGHTF = 57
+MAP_MONS_GUARDF = 58
+MAP_MONS_STONEM = 59
 MAP_MONS_M = 60
 # 61-80 为npc
 MAP_NPC_RED = 61
 MAP_NPC_BLUE = 62
+MAP_NPC_YELLOW = 63
 MAP_NPC_M = 80
 # 81-100为可拾取的物品
 MAP_ITEM_RM = 81
+MAP_ITEM_BM = 82
+MAP_ITEM_RW = 83
+MAP_ITEM_RP = 84
 MAP_ITEM_RG = 85
 MAP_ITEM_BG = 86
+MAP_ITEM_AG = 87
 MAP_ITEM_YK = 89
 MAP_ITEM_BK = 90
 MAP_ITEM_RK = 91
+MAP_ITEM_UL = 92
+MAP_ITEM_IS = 93
+MAP_ITEM_SS = 94
+MAP_ITEM_IE = 95
+
 MAP_ITEM_M = 100
 
 # 键盘映射
@@ -163,10 +189,13 @@ MONS_6 = "Monster06"
 MONS_7 = "Monster07"
 MONS_8 = "Monster08"
 MONS_9 = "Monster09"
+MONS_10 = "Monster10"
+MONS_11 = "Monster11"
 NPC_1 = "NPC01"
 ITEM_01 = "Item01"
 ITEM_02 = "Item02"
 ITEM_05 = "Item05"
+ITEM_08 = "Item08"
 ITEM_10 = "Item10"
 ITEM_GEM = "Item-Gem01"
 
@@ -220,6 +249,41 @@ IRON_RAIL_IMG = {
     "sta_wh_g": (1, 1),
     "dyn_rect": (96, 0, 32, 128),
     "dyn_wh_g": (1, 4)
+}
+GOD_LEFT_IMG = {
+    "super": EVENT_OTHER,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+GOD_CENTER_IMG = {
+    "super": EVENT_OTHER,
+    "pointx": 32,
+    "pointy": 0,
+    "sta_rect": (32, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+GOD_RIGHT_IMG = {
+    "super": EVENT_OTHER,
+    "pointx": 64,
+    "pointy": 0,
+    "sta_rect": (64, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+RETURN_WEAK_IMG = {
+    "super": ITEM_02,
+    "pointx": 64,
+    "pointy": 0,
+    "sta_rect": (64, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+RETURN_POI_IMG = {
+    "super": ITEM_02,
+    "pointx": 96,
+    "pointy": 0,
+    "sta_rect": (96, 0, 32, 32),
+    "sta_wh_g": (1, 1)
 }
 HERO_UP_IMG = {
     "super": EVE_ACTOR,
@@ -275,6 +339,15 @@ DOOR_BLUE_IMG = {
     "dyn_rect": (32, 0, 32, 128),
     "dyn_wh_g": (1, 4)
 }
+DOOR_RED_IMG = {
+    "super": EVENT_DOOR,
+    "pointx": 64,
+    "pointy": 0,
+    "sta_rect": (64, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (64, 0, 32, 128),
+    "dyn_wh_g": (1, 4)
+}
 
 MONS_SLING_IMG = {
     "super": MONS_1,
@@ -294,6 +367,15 @@ MONS_SLINR_IMG = {
     "dyn_rect": (0, 32, 128, 32),
     "dyn_wh_g": (4, 1)
 }
+MONS_SLINB_IMG = {
+    "super": MONS_1,
+    "pointx": 0,
+    "pointy": 64,
+    "sta_rect": (0, 64, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 64, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
 MONS_BATF_IMG = {
     "super": MONS_3,
     "pointx": 0,
@@ -301,6 +383,24 @@ MONS_BATF_IMG = {
     "sta_rect": (0, 0, 32, 32),
     "sta_wh_g": (1, 1),
     "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_BATS_IMG = {
+    "super": MONS_3,
+    "pointx": 0,
+    "pointy": 32,
+    "sta_rect": (0, 32, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 32, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_BATT_IMG = {
+    "super": MONS_3,
+    "pointx": 0,
+    "pointy": 64,
+    "sta_rect": (0, 64, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 64, 128, 32),
     "dyn_wh_g": (4, 1)
 }
 MONS_MUMMYF_IMG = {
@@ -321,7 +421,78 @@ MONS_SKULLF_IMG = {
     "dyn_rect": (0, 0, 128, 32),
     "dyn_wh_g": (4, 1)
 }
-
+MONS_SKULLS_IMG = {
+    "super": MONS_2,
+    "pointx": 0,
+    "pointy": 32,
+    "sta_rect": (0, 32, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 32, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_SKULLT_IMG = {
+    "super": MONS_2,
+    "pointx": 0,
+    "pointy": 64,
+    "sta_rect": (0, 64, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 64, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_NIGHTF_IMG = {
+    "super": MONS_7,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_GUARDF_IMG = {
+    "super": MONS_5,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_WZF_IMG = {
+    "super": MONS_6,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_WZS_IMG = {
+    "super": MONS_6,
+    "pointx": 0,
+    "pointy": 32,
+    "sta_rect": (0, 32, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 32, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_STONEM_IMG = {
+    "super": MONS_10,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+MONS_SLIMEH_IMG = {
+    "super": MONS_11,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 0, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
 NPC_RED_IMG = {
     "super": NPC_1,
     "pointx": 0,
@@ -340,6 +511,17 @@ NPC_BLUE_IMG = {
     "dyn_rect": (0, 0, 128, 32),
     "dyn_wh_g": (4, 1)
 }
+NPC_YELLOW_IMG = {
+    "super": NPC_1,
+    "pointx": 0,
+    "pointy": 64,
+    "sta_rect": (0, 64, 32, 32),
+    "sta_wh_g": (1, 1),
+    "dyn_rect": (0, 64, 128, 32),
+    "dyn_wh_g": (4, 1)
+}
+
+
 YKEY_IMG = {
     "super": ITEM_01,
     "pointx": 0,
@@ -375,6 +557,13 @@ RED_MEDIF_IMG = {
     "sta_rect": (0, 0, 32, 32),
     "sta_wh_g": (1, 1)
 }
+BLUE_MED_IMG = {
+    "super": ITEM_02,
+    "pointx": 32,
+    "pointy": 0,
+    "sta_rect": (32, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
 RED_GEM_IMG = {
     "super": ITEM_GEM,
     "pointx": 0,
@@ -387,6 +576,41 @@ BLUE_GEM_IMG = {
     "pointx": 0,
     "pointy": 0,
     "sta_rect": (32, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+AGI_GEM_IMG = {
+    "super": ITEM_GEM,
+    "pointx": 64,
+    "pointy": 0,
+    "sta_rect": (64, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+UP_LEVEL_IMG = {
+    "super": ITEM_10,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+IRON_SWORD_IMG = {
+    "super": ITEM_08,
+    "pointx": 0,
+    "pointy": 0,
+    "sta_rect": (0, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+SILVER_SWORD_IMG = {
+    "super": ITEM_08,
+    "pointx": 32,
+    "pointy": 0,
+    "sta_rect": (32, 0, 32, 32),
+    "sta_wh_g": (1, 1)
+}
+IRON_EQUIP_IMG = {
+    "super": ITEM_08,
+    "pointx": 64,
+    "pointy": 64,
+    "sta_rect": (64, 64, 32, 32),
     "sta_wh_g": (1, 1)
 }
 ARROW_R_IMG = {

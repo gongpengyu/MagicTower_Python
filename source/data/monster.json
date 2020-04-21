@@ -5,6 +5,7 @@
     "atk": 18,
     "defend": 1,
     "agi": 0,
+    "skin_thick": false,
     "exp": 1,
     "coin": 1
   },
@@ -14,34 +15,82 @@
     "atk": 20,
     "defend": 4,
     "agi": 0,
+    "skin_thick": false,
     "exp": 1,
     "coin": 2
   },
   "slime_black": {
     "name": "slime-black",
-    "hp": 50,
-    "atk": 20,
-    "defend": 4,
-    "agi": 0
+    "hp": 80,
+    "atk": 37,
+    "defend": 9,
+    "agi": 0,
+    "skin_thick": false,
+    "exp": 1,
+    "coin": 5
   },
   "bat_first": {
     "name": "bat-first",
-    "hp": 50,
+    "hp": 55,
     "atk": 32,
     "defend": 2,
     "agi": 4,
+    "skin_thick": false,
     "exp": 1,
     "coin": 3
   },
+  "bat_second": {
+    "name": "bat-second",
+    "hp": 66,
+    "atk": 55,
+    "defend": 12,
+    "agi": 4,
+    "skin_thick": false,
+    "exp": 1,
+    "coin": 6
+  },
+  "bat_third": {
+    "name": "bat-third",
+    "hp": 210,
+    "atk": 185,
+    "defend": 70,
+    "agi": 4,
+    "skin_thick": false,
+    "exp": 3,
+    "coin": 24
+  },
   "skull_first": {
     "name": "skull-first",
-    "hp": 85,
+    "hp": 95,
     "atk": 70,
     "defend": 0,
     "agi": 3,
     "weak_hit": 50,
+    "skin_thick": false,
     "exp": 1,
     "coin": 5
+  },
+  "skull_second": {
+    "name": "skull-second",
+    "hp": 190,
+    "atk": 100,
+    "defend": 5,
+    "weak_hit": 50,
+    "skin_thick": false,
+    "agi": 3,
+    "exp": 2,
+    "coin": 13
+  },
+  "skull_third": {
+    "name": "skull-third",
+    "hp": 290,
+    "atk": 170,
+    "defend": 23,
+    "weak_hit": 50,
+    "skin_thick": false,
+    "agi": 3,
+    "exp": 3,
+    "coin": 21
   },
   "mummy_first": {
     "name": "mummy-first",
@@ -50,8 +99,68 @@
     "defend": 33,
     "agi": 2,
     "poison_hit": 99,
-    "exp": 3,
+    "skin_thick": false,
+    "exp": 2,
+    "coin": 15
+  },
+  "wizard_first": {
+    "name": "wizard-first",
+    "hp": 65,
+    "atk": 10,
+    "defend": 5,
+    "agi": 0,
+    "skin_thick": false,
+    "exp": 1,
+    "coin": 4
+  },
+  "wizard_second": {
+    "name": "wizard-second",
+    "hp": 110,
+    "atk": 40,
+    "defend": 20,
+    "agi": 3,
+    "skin_thick": false,
+    "exp": 2,
     "coin": 10
+  },
+  "night_first": {
+    "name": "night-first",
+    "hp": 130,
+    "atk": 115,
+    "defend": 43,
+    "agi": 4,
+    "skin_thick": false,
+    "exp": 2,
+    "coin": 17
+  },
+  "guard_first": {
+    "name": "guard-first",
+    "hp": 70,
+    "atk": 40,
+    "defend": 55,
+    "agi": 0,
+    "skin_thick": false,
+    "exp": 1,
+    "coin": 5
+  },
+  "stonem_first": {
+    "name": "stonem-first",
+    "hp": 30,
+    "atk": 40,
+    "defend": 70,
+    "agi": 0,
+    "skin_thick": true,
+    "exp": 1,
+    "coin": 10
+  },
+  "slimehuman_first": {
+    "name": "slimehuman-first",
+    "hp": 110,
+    "atk": 80,
+    "defend": 40,
+    "agi": 60,
+    "skin_thick": false,
+    "exp": 2,
+    "coin": 15
   }
-
 }

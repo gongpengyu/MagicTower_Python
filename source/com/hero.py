@@ -9,16 +9,18 @@ class Hero():
         self.NAME = "steve"
         self.LV = 1
         self.HP = 10000
-        self.ATK = 10
-        self.DEF = 10
-        self.AGI = 2
+        self.ATK = 90
+        self.DEF = 100
+        self.AGI = 20
         self.EXP = 0
         self.STATE = c.HERO_STA["normal"]
         self.ITEMS = {
             "y_key": 1,
             "b_key": 1,
             "r_key": 1,
-            "coin": 100
+            "coin": 100,
+            "atk_equip": None,
+            "def_equip": None
         }
         self.temp_data = {}
 
@@ -37,8 +39,11 @@ class Hero():
             if self.ATK < monster.DEF:
                 damage = 0
             else:
-                damage = (self.ATK - monster.DEF)
-                damage = round(damage)
+                if monster.SKIN_THICK:
+                    damage = 1
+                else:
+                    damage = (self.ATK - monster.DEF)
+                    damage = round(damage)
 
         # 追加伤害
         monster.HP = monster.HP - damage
@@ -66,6 +71,30 @@ class Hero():
             self.HP = self.HP - (self.temp_data["poi_add"]/100)*self.HP
             self.HP = round(self.HP, 2)
 
+    def add_equip(self, e_item):
+        # 先确定装备类型
+        if e_item["equip_class"] == "add_atk":
+            # 判断物品栏中是否有装备，有的话替换，没有的话，添加
+            if self.ITEMS["atk_equip"] is None:
+                # 将物品挂在self,ITEMS中
+                self.ITEMS["atk_equip"] = e_item
+                # 效果作用于主角
+                self.ATK += e_item["effect"]
+            else:
+                # 清除效果的影响
+                self.ATK -= self.ITEMS["atk_equip"]["effect"]
+                # 重新挂载
+                self.ITEMS["atk_equip"] = e_item
+                # 效果作用
+                self.ATK += e_item["effect"]
+        elif e_item["equip_class"] == "add_def":
+            if self.ITEMS["def_equip"] is None:
+                self.ITEMS["def_equip"] = e_item
+                self.DEF += e_item["effect"]
+            else:
+                self.DEF -= self.ITEMS["def_equip"]["effect"]
+                self.ITEMS["def_equip"] = e_item
+                self.DEF += e_item["effect"]
 
     # 角色正常化，部分状态可恢复
     def be_normal(self):
@@ -86,6 +115,19 @@ class Hero():
             self.use_item(items.ITEM_RED_GEM)
         elif name == "blue_gem":
             self.use_item(items.ITEM_BLUE_GEM)
+        elif name == "god_hp":
+            # 主角血量增加500
+            self.HP += 500
+        elif name == "god_atk":
+            self.ATK += 3
+        elif name == "god_def":
+            self.DEF += 3
+
+    # 角色升级
+    def up_level(self, num):
+        self.LV += num
+        for i in range(num):
+            self.HP += 500
 
     def use_item(self, item_dict):
         # 记录效果
@@ -93,7 +135,8 @@ class Hero():
         # 确定使用那种效果
         if item_dict["exist"]:
             # 非快消品，另外考虑
-            pass
+            txt = "you get " + item_dict["name"]
+            self.add_equip(item_dict)
         else:
             # 快消品直接使用
             for key in item_dict:
@@ -113,6 +156,14 @@ class Hero():
                     # 加agi
                     self.AGI += item_dict[key]
                     txt = txt + key + ": " + str(item_dict[key]) + ";"
+                elif key == "be_normal":
+                    # 状态恢复
+                    self.be_normal()
+                    txt = "状态恢复正常"
+                elif key == "add_lv":
+                    self.up_level(item_dict[key])
+                    txt = "get lv up"
+
         return txt
 
     def print_hero(self):

@@ -35,6 +35,7 @@ class NpcList():
             else:
                 hero.ITEMS["coin"] -= item_price["how_much"]
                 hero.use_trade_item(item_price["name"])
+
                 return True
         elif item_price["cost"] == "exp":
             if hero.EXP < item_price["how_much"]:
@@ -44,4 +45,8 @@ class NpcList():
                 hero.use_trade_item(item_price["name"])
                 return True
 
+    # n_items为物品，step为上涨价格
+    def up_price(self, n_items, step):
+        for x in n_items:
+            x["how_much"] += step
 

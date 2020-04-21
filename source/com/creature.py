@@ -36,16 +36,60 @@ class CreatureList():
                     mons = Slime(self.ar_list["slime_red"])
                     m_pos = (j, i)
                     mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_SB:
+                    mons = Slime(self.ar_list["slime_black"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
                 elif layer[j][i] == c.MAP_MONS_BATF:
                     mons = Bat(self.ar_list["bat_first"])
-                    m_pos = (j,i)
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_BATS:
+                    mons = Bat(self.ar_list["bat_second"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_BATT:
+                    mons = Bat(self.ar_list["bat_third"])
+                    m_pos = (j, i)
                     mons_list.append([m_pos, mons])
                 elif layer[j][i] == c.MAP_MONS_SKULLF:
                     mons = Skull(self.ar_list["skull_first"])
                     m_pos = (j, i)
                     mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_SKULLS:
+                    mons = Skull(self.ar_list["skull_second"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_SKULLT:
+                    mons = Skull(self.ar_list["skull_third"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
                 elif layer[j][i] == c.MAP_MONS_MUMMYF:
                     mons = Mummy(self.ar_list["mummy_first"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_WZF:
+                    mons = Wizard(self.ar_list["wizard_first"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_WZS:
+                    mons = Wizard(self.ar_list["wizard_second"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_NIGHTF:
+                    mons = Knight(self.ar_list["night_first"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_GUARDF:
+                    mons = Guard(self.ar_list["guard_first"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_STONEM:
+                    mons = StoneM(self.ar_list["stonem_first"])
+                    m_pos = (j, i)
+                    mons_list.append([m_pos, mons])
+                elif layer[j][i] == c.MAP_MONS_SLIMEH:
+                    mons = SlimeHuman(self.ar_list["slimehuman_first"])
                     m_pos = (j, i)
                     mons_list.append([m_pos, mons])
 
