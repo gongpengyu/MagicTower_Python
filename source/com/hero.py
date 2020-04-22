@@ -12,7 +12,7 @@ class Hero():
         self.ATK = 90
         self.DEF = 100
         self.AGI = 20
-        self.EXP = 0
+        self.EXP = 100
         self.STATE = c.HERO_STA["normal"]
         self.ITEMS = {
             "y_key": 1,
@@ -122,12 +122,16 @@ class Hero():
             self.ATK += 3
         elif name == "god_def":
             self.DEF += 3
+        elif name == "up_lv":
+            self.up_level(1)
 
     # 角色升级
     def up_level(self, num):
         self.LV += num
         for i in range(num):
-            self.HP += 500
+            self.HP *= 1.2
+            self.ATK *= 1.2
+            self.DEF *= 1.2
 
     def use_item(self, item_dict):
         # 记录效果

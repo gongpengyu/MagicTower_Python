@@ -35,7 +35,6 @@ class NpcList():
             else:
                 hero.ITEMS["coin"] -= item_price["how_much"]
                 hero.use_trade_item(item_price["name"])
-
                 return True
         elif item_price["cost"] == "exp":
             if hero.EXP < item_price["how_much"]:

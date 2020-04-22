@@ -181,6 +181,9 @@ class Shower():
             for j in range(size[1]):
                 surface.blit(img, (i*c.PIXEL_GRID, j * c.PIXEL_GRID))
 
+        # 绘制边框
+        t_rect = pg.draw.rect(surface, c.PURE_BLACK, (0, 0, size[0] * c.PIXEL_GRID, size[1] * c.PIXEL_GRID), 2)
+
     def show_sta_img(self, g_pos, g_size, img, surface):
         for i in range(g_size[0]):
             for j in range(g_size[1]):
@@ -191,23 +194,16 @@ class Shower():
     def draw_sta_pane(self):
         # screen的背景
         self.show_background([c.SCREEN_W_G, c.SCREEN_H_G], self.img_list.get_img("bg_stone_s"), self.screen)
-        # 三个子screen的外框
-        hero_rect = pg.draw.rect(self.screen, c.PURE_BLACK,
-                                 (c.HERO_POINTX - 1, c.HERO_POINTY - 1, c.HERO_WIDTH + 1, c.HERO_HEIGHT + 1), 2)
-        item_rect = pg.draw.rect(self.screen, c.PURE_BLACK,
-                                 (c.ITEM_POINTX - 1, c.ITEM_POINTY - 1, c.ITEM_WIDTH + 1, c.ITEM_HEIGHT + 1), 2)
-        active_rect = pg.draw.rect(self.screen, c.PURE_BLACK,
-                                   (c.ACT_POINTX - 1, c.ACT_POINTY - 1, c.ACT_WIDTH + 1, c.ACT_HEIGHT + 1), 2)
 
 
     def fresh_title(self):
         # 一些小标题
-        self.show_sta_img((c.L_G_POINTX, c.L_G_POINTY), (c.L_W_G, c.L_H_G), self.img_list.get_img("b_stone_s"),
-                          self.screen)
-        title_surface = self.screen.subsurface(c.L_RECT)
+        surface = self.screen.subsurface(c.L_RECT)
+        self.show_background([c.L_W_G, c.L_H_G], self.img_list.get_img("b_stone_s"), surface)
+
         title_s = "第" + str(self.l_index) + "层"
         title_h = self.img_list.get_sta_txt(title_s, "small")
-        title_surface.blit(title_h, (0, 0))
+        surface.blit(title_h, (8, 8))
 
     # map为待映射的数组
     def fresh_layer(self):
@@ -220,6 +216,7 @@ class Shower():
         w_g = len(data[0])
 
         num = next(self.l_count)
+        rect_d = (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
         for j in range(h_g):
             for i in range(w_g):
                 pos_r = (i * c.PIXEL_GRID, j * c.PIXEL_GRID)
@@ -228,213 +225,91 @@ class Shower():
                 elif data[j][i] == c.MAP_B_STONE:
                     self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                 elif data[j][i] == c.MAP_UP_FLO:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("up_floor_s"), pos_r)
                 elif data[j][i] == c.MAP_DOWN_FLO:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("down_floor_s"), pos_r)
                 elif data[j][i] == c.MAP_IRON_RAIL:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("iron_rail_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_RM:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_rmf_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_BM:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_bm_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_RG:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_rgf_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_BG:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_bgf_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_AG:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_agf_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_YK:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_ykey_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_BK:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_bkey_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_RK:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_rkey_s"), pos_r)
                 elif data[j][i] == c.MAP_DOOR_YELLOW:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("door_yellow_s"), pos_r)
                 elif data[j][i] == c.MAP_DOOR_BLUE:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("door_blue_s"), pos_r)
                 elif data[j][i] == c.MAP_DOOR_RED:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("door_red_s"), pos_r)
                 elif data[j][i] == c.MAP_GOD_LEFT:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("god_left_s"), pos_r)
                 elif data[j][i] == c.MAP_GOD_CENTER:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("god_center_s"), pos_r)
                 elif data[j][i] == c.MAP_GOD_RIGHT:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("god_right_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_RW:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_rw_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_RP:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_rp_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_UL:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_ul_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_IS:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_is_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_SS:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_ss_s"), pos_r)
                 elif data[j][i] == c.MAP_ITEM_IE:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
                     self.active_screen.blit(self.img_list.get_img("item_ie_s"), pos_r)
                 elif data[j][i] == c.MAP_MAGMA:
-                    self.active_screen.blit(
-                        self.img_list.get_img("magma_d"),
-                        pos_r,
-                        (num*c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("magma_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_SG:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_sg_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_sg_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_SR:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_sr_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_sr_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_SB:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_sb_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_sb_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_BATF:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_bf_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_bf_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_BATS:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_bs_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_bs_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_BATT:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_bt_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_bt_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_SKULLF:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_skullf_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_skullf_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_SKULLS:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_skulls_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_skulls_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_SKULLT:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_skullt_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_skullt_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_MUMMYF:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_mummyf_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_mummyf_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_NIGHTF:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_nightf_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_nightf_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_WZF:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_wzf_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_wzf_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_NPC_RED:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("npc_red_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("npc_red_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_NPC_BLUE:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("npc_blue_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("npc_blue_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_NPC_YELLOW:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("npc_yellow_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("npc_yellow_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_WZS:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_wzs_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_wzs_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_GUARDF:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_guardf_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_guardf_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_STONEM:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_stonemf_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_stonemf_d"), pos_r, rect_d)
                 elif data[j][i] == c.MAP_MONS_SLIMEH:
-                    self.active_screen.blit(self.img_list.get_img("b_stone_s"), pos_r)
-                    self.active_screen.blit(
-                        self.img_list.get_img("monster_slimeh_d"),
-                        pos_r,
-                        (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-                    )
+                    self.active_screen.blit(self.img_list.get_img("monster_slimeh_d"), pos_r, rect_d)
 
     def fresh_hero(self, pos, direct):
         if direct == c.KEY_UP:
@@ -542,32 +417,30 @@ class Shower():
     # 走路动作,pos位置，key方向
     def fresh_walk(self, pos, key, num):
         surface = self.active_screen
-
+        
+        pos_r = (pos[0] * c.PIXEL_GRID, pos[1] * c.PIXEL_GRID)
+        rect_r = (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
         if key == c.KEY_UP:
-            surface.blit(
-                self.img_list.get_img("hero_up_d"),
-                (pos[0] * c.PIXEL_GRID, pos[1] * c.PIXEL_GRID),
-                (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-            )
+            surface.blit(self.img_list.get_img("hero_up_d"), pos_r, rect_r)
         elif key == c.KEY_DOWN:
-            surface.blit(
-                self.img_list.get_img("hero_down_d"),
-                (pos[0] * c.PIXEL_GRID, pos[1] * c.PIXEL_GRID),
-                (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-            )
+            surface.blit(self.img_list.get_img("hero_down_d"), pos_r, rect_r)
         elif key == c.KEY_LEFT:
-            surface.blit(
-                self.img_list.get_img("hero_left_d"),
-                (pos[0] * c.PIXEL_GRID, pos[1] * c.PIXEL_GRID),
-                (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-            )
+            surface.blit(self.img_list.get_img("hero_left_d"), pos_r, rect_r)
         elif key == c.KEY_RIGHT:
-            surface.blit(
-                self.img_list.get_img("hero_right_d"),
-                (pos[0] * c.PIXEL_GRID, pos[1] * c.PIXEL_GRID),
-                (num * c.PIXEL_GRID, 0, c.PIXEL_GRID, c.PIXEL_GRID)
-            )
+            surface.blit(self.img_list.get_img("hero_right_d"), pos_r, rect_r)
 
+    # 负责转向
+    def fresh_turn(self, pos, key):
+        surface = self.active_screen
+        pos_r = (pos[0] * c.PIXEL_GRID, pos[1] * c.PIXEL_GRID)
+        if key == c.KEY_UP:
+            surface.blit(self.img_list.get_img("hero_up_s"), pos_r)
+        elif key == c.KEY_DOWN:
+            surface.blit(self.img_list.get_img("hero_down_s"), pos_r)
+        elif key == c.KEY_LEFT:
+            surface.blit(self.img_list.get_img("hero_left_s"), pos_r)
+        elif key == c.KEY_RIGHT:
+            surface.blit(self.img_list.get_img("hero_right_s"), pos_r)
     # 开铁门动作
     def fresh_open(self, pos, door_type, num):
         surface = self.active_screen
@@ -594,9 +467,7 @@ class Shower():
         surface = self.screen.subsurface(c.ATKPANE_RECT)
 
         # 绘制背景
-        for i in range(c.ATKPANE_W_G):
-            for j in range(c.ATKPANE_H_G):
-                surface.blit(self.img_list.get_img("b_stone_s"), (i*c.PIXEL_GRID, j*c.PIXEL_GRID))
+        self.show_background([c.ATKPANE_W_G, c.ATKPANE_H_G], self.img_list.get_img("b_stone_s"), surface)
 
         # 装配属性
         mos_pic = None

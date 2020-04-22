@@ -7,18 +7,7 @@
         "希望你能够活着回去，",
         "不用担心，我会帮你收尸的"
       ],
-      "n_items": [
-        {
-          "name": "red_gem",
-          "cost": "coin",
-          "how_much": 20
-        },
-        {
-          "name": "blue_gem",
-          "cost": "exp",
-          "how_much": 10
-        }
-      ]
+      "n_items": ""
     }
   ],
   "layer_1": [
@@ -76,6 +65,53 @@
           "cost": "coin",
           "how_much": 20
         }
+      ]
+    }
+  ],
+  "layer_4": [
+    {
+      "pos": [3, 7],
+      "word":[
+        "你以为我会卖你东西？",
+        "滚滚滚",
+        "太麻烦了，不卖"
+      ]
+    }
+  ],
+  "layer_5": [
+    {
+      "pos":[1, 1],
+      "word": [
+        "年轻人，要不要来我这",
+        "卖些体力啊。。",
+        "可以用经验换东西哦"
+        ],
+      "n_items": [
+        {
+          "name": "up_lv",
+          "cost": "exp",
+          "how_much": 70
+        },
+        {
+          "name": "red_gem",
+          "cost": "exp",
+          "how_much": 20
+        },
+        {
+          "name": "blue_gem",
+          "cost": "exp",
+          "how_much": 20
+        }
+      ]
+    }
+  ],
+  "layer_8": [
+    {
+      "pos": [8, 10],
+      "word": [
+        "程序员太懒",
+        "没写我的功能",
+        "走吧"
       ]
     }
   ]

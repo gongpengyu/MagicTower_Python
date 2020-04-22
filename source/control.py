@@ -51,6 +51,10 @@ class Control(State):
         self.now_shower.init_shower(self.now_map.now_layer(), self.now_hero, self.now_hero.ITEMS)
         self.key_direct = c.KEY_UP
 
+    # 转向
+    def turn_direct(self):
+        self.now_shower.fresh_turn(self.pos, self.key_direct)
+
     # 角色的状态检测
     def to_touch(self):
         data = self.now_map.now_layer()
@@ -59,22 +63,20 @@ class Control(State):
         w_g = len(data[0])
         key = self.key_direct
 
+        self.turn_direct()
+
         if key == c.KEY_UP:
             if (pos[1]-1 < 0) or (data[pos[1]-1][pos[0]] == c.MAP_W_STONE):
                 self.to_stop()
-                return c.KEY_STOP
             elif data[pos[1]-1][pos[0]] == c.MAP_B_STONE:
                 self.to_move()
-                return c.KEY_UP
             elif c.MAP_MONS_WZF <= data[pos[1] - 1][pos[0]] <= c.MAP_MONS_M:
                 m_pos = (pos[1]-1, pos[0])
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
-                return c.KEY_TOATK
             elif c.MAP_NPC_RED <= data[pos[1]-1][pos[0]] <= c.MAP_NPC_M or data[pos[1]-1][pos[0]] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1]-1, pos[0])
                 self.to_trade(n_pos)
-                return c.KEY_TRADE
             elif c.MAP_IRON_RAIL <= data[pos[1]-1][pos[0]] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1]-1, pos[0]]
                 self.to_open(e_pos)
@@ -88,19 +90,15 @@ class Control(State):
         elif key == c.KEY_DOWN:
             if (pos[1]+1 >= h_g) or (data[pos[1]+1][pos[0]] == c.MAP_W_STONE):
                 self.to_stop()
-                return c.KEY_STOP
             elif data[pos[1]+1][pos[0]] == c.MAP_B_STONE:
                 self.to_move()
-                return c.KEY_DOWN
             elif c.MAP_MONS_WZF <= data[pos[1] + 1][pos[0]] <= c.MAP_MONS_M:
                 m_pos = (pos[1]+1, pos[0])
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
-                return c.KEY_TOATK
             elif c.MAP_NPC_RED <= data[pos[1] + 1][pos[0]] <= c.MAP_NPC_M or data[pos[1] + 1][pos[0]] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1]+1, pos[0])
                 self.to_trade(n_pos)
-                return c.KEY_TRADE
             elif c.MAP_IRON_RAIL <= data[pos[1]+1][pos[0]] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1]+1, pos[0]]
                 self.to_open(e_pos)
@@ -114,19 +112,15 @@ class Control(State):
         elif key == c.KEY_LEFT:
             if (pos[0]-1 < 0) or (data[pos[1]][pos[0]-1] == c.MAP_W_STONE):
                 self.to_stop()
-                return c.KEY_STOP
             elif data[pos[1]][pos[0]-1] == c.MAP_B_STONE:
                 self.to_move()
-                return c.KEY_LEFT
             elif c.MAP_MONS_WZF <= data[pos[1]][pos[0] - 1] <= c.MAP_MONS_M:
                 m_pos = (pos[1], pos[0]-1)
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
-                return c.KEY_TOATK
             elif c.MAP_NPC_RED <= data[pos[1]][pos[0] - 1] <= c.MAP_NPC_M or data[pos[1]][pos[0] - 1] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1], pos[0]-1)
                 self.to_trade(n_pos)
-                return c.KEY_TRADE
             elif c.MAP_IRON_RAIL <= data[pos[1]][pos[0]-1] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1], pos[0]-1]
                 self.to_open(e_pos)
@@ -140,19 +134,15 @@ class Control(State):
         elif key == c.KEY_RIGHT:
             if (pos[0]+1 >= w_g) or (data[pos[1]][pos[0]+1] == c.MAP_W_STONE):
                 self.to_stop()
-                return c.KEY_STOP
             elif data[pos[1]][pos[0]+1] == c.MAP_B_STONE:
                 self.to_move()
-                return c.KEY_RIGHT
             elif c.MAP_MONS_WZF <= data[pos[1]][pos[0] + 1] <= c.MAP_MONS_M:
                 m_pos = (pos[1], pos[0]+1)
                 mons = self.mons_list.get_mons(self.now_map.get_now_index(), m_pos)
                 self.to_attack(mons, m_pos)
-                return c.KEY_TOATK
             elif c.MAP_NPC_RED <= data[pos[1]][pos[0] + 1] <= c.MAP_NPC_M or data[pos[1]][pos[0] + 1] == c.MAP_GOD_CENTER:
                 n_pos = (pos[1], pos[0]+1)
                 self.to_trade(n_pos)
-                return c.KEY_TRADE
             elif c.MAP_IRON_RAIL <= data[pos[1]][pos[0]+1] <= c.MAP_DOOR_RED:
                 e_pos = [pos[1], pos[0]+1]
                 self.to_open(e_pos)
@@ -168,7 +158,7 @@ class Control(State):
         key = self.key_direct
 
         # 先绘制走路动画
-        for i in range(4):
+        for i in range(2):
             self.now_shower.fresh_layer()
             self.now_shower.fresh_walk(self.pos, key, i)
             pg.time.delay(100)
@@ -288,15 +278,18 @@ class Control(State):
                             else:
                                 k_index -= 1
                         elif keys[pg.K_DOWN]:
-                            if k_index + 1 > 2:
+                            if k_index + 1 > 3:
                                 pass
                             else:
                                 k_index += 1
                         elif keys[pg.K_z]:
                             print("enter z")
                             # 表示要购买该物资了
-                            buy_item = npc_data["n_items"][k_index]
-                            trade_finished = self.npc_list.trade(buy_item, self.now_hero)
+                            if k_index < len(npc_data["n_items"]):
+                                buy_item = npc_data["n_items"][k_index]
+                                trade_finished = self.npc_list.trade(buy_item, self.now_hero)
+                            else:
+                                trade_finished = False
 
                             if trade_finished:
                                 # 针对神明特殊处理
@@ -487,16 +480,13 @@ class Control(State):
                 if pg.key.get_pressed():
                     if keys[pg.K_UP]:
                         self.key_direct = c.KEY_UP
-                        self.to_touch()
                     elif keys[pg.K_DOWN]:
                         self.key_direct = c.KEY_DOWN
-                        self.to_touch()
                     elif keys[pg.K_LEFT]:
                         self.key_direct = c.KEY_LEFT
-                        self.to_touch()
                     elif keys[pg.K_RIGHT]:
                         self.key_direct = c.KEY_RIGHT
-                        self.to_touch()
+                self.to_touch()
 
         pg.time.delay(100)
         pg.display.update()
