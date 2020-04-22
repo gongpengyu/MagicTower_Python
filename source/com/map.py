@@ -20,7 +20,7 @@ class Map():
             layer_data = json.load(f)
             for key in layer_data:
                 self.layer_list.append(layer_data[key])
-            self.now_index = 0
+            self.now_index = 10
 
     # 获取上一层地图数据
     def pre_layer(self):
