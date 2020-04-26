@@ -1,3 +1,5 @@
+__author__ = "scarecrow_gpy"
+
 from .com.map import Map
 from .com.hero import Hero
 from .shower import Shower
@@ -34,6 +36,7 @@ class State():
 class Control(State):
     def __init__(self):
         State.__init__(self)
+        self.e_index = 0
 
     # 初始化状态
     def init_State(self):
@@ -50,6 +53,12 @@ class Control(State):
         # 绑定用于展示的数据
         self.now_shower.init_shower(self.now_map.now_layer(), self.now_hero, self.now_hero.ITEMS)
         self.key_direct = c.KEY_UP
+
+        # 绘制静态层
+        self.now_shower.draw_sta_pane()
+        self.now_shower.fresh_hero_pane()
+        self.now_shower.fresh_item_pane()
+        self.now_shower.fresh_title()
 
     # 转向
     def turn_direct(self):
@@ -465,19 +474,46 @@ class Control(State):
         self.now_shower.l_count = Tool.animate_count(4)
 
 
-
+    def to_end(self, e_index):
+        if e_index == 0:
+            # 代表重启游戏
+            self.init_State()
+        elif e_index == 1:
+            # 代表结束游戏
+            self.done = False
+        else:
+            print("index out range")
     # 动态监测键盘事件
     def event_loop(self):
         self.now_shower.fresh_layer()
         self.now_shower.fresh_hero(self.pos, self.key_direct)
 
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                self.done = False
-            elif event.type == pg.KEYDOWN:
-                print("keydown")
-                keys = pg.key.get_pressed()
-                if pg.key.get_pressed():
+        if self.now_hero.isDeath():
+            self.now_shower.fresh_dead_pane(self.e_index)
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    self.done = False
+                elif event.type == pg.KEYDOWN:
+                    keys = pg.key.get_pressed()
+                    if keys[pg.K_UP]:
+                        if self.e_index - 1 < 0:
+                            pass
+                        else:
+                            self.e_index -= 1
+                    elif keys[pg.K_DOWN]:
+                        if self.e_index + 1 >= 2:
+                            pass
+                        else:
+                            self.e_index += 1
+                    elif keys[pg.K_z]:
+                        self.to_end(self.e_index)
+        else:
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    self.done = False
+                elif event.type == pg.KEYDOWN:
+                    print("keydown")
+                    keys = pg.key.get_pressed()
                     if keys[pg.K_UP]:
                         self.key_direct = c.KEY_UP
                     elif keys[pg.K_DOWN]:
@@ -486,7 +522,8 @@ class Control(State):
                         self.key_direct = c.KEY_LEFT
                     elif keys[pg.K_RIGHT]:
                         self.key_direct = c.KEY_RIGHT
-                self.to_touch()
+                    self.to_touch()
+
 
         pg.time.delay(100)
         pg.display.update()
@@ -494,12 +531,6 @@ class Control(State):
     def main(self):
         # 主要运行函数
         self.init_State()
-        # 绘制静态层
-        self.now_shower.draw_sta_pane()
-        self.now_shower.fresh_hero_pane()
-        self.now_shower.fresh_item_pane()
-        self.now_shower.fresh_title()
-        pg.display.update()
 
         # 动态绘制
         while self.done:

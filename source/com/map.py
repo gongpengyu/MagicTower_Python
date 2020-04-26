@@ -1,3 +1,5 @@
+__author__ = "scarecrow_gpy"
+
 import os
 import json
 class Map():
@@ -20,7 +22,7 @@ class Map():
             layer_data = json.load(f)
             for key in layer_data:
                 self.layer_list.append(layer_data[key])
-            self.now_index = 5
+            self.now_index = 0
 
     # 获取上一层地图数据
     def pre_layer(self):

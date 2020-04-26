@@ -1,3 +1,5 @@
+__author__ = "scarecrow_gpy"
+
 from .. import constants as c
 from .monster import *
 

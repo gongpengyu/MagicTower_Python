@@ -1,3 +1,5 @@
+__author__ = "scarecrow_gpy"
+
 # 负责游戏的展示
 import pygame as pg
 from . import constants as c
@@ -56,6 +58,12 @@ class ImgList():
             "txt_agi_s": self.get_sta_txt("敏捷：", "small"),
             "txt_exp_s": self.get_sta_txt("经验值：", "small"),
             "txt_vs_s": self.get_sta_txt("VS", "small"),
+            "txt_go_s": self.get_sta_txt("game over", "medium"),
+            "txt_restart_s": self.get_sta_txt("restart", "small"),
+            "txt_end_s": self.get_sta_txt("end", "small"),
+            "txt_start_s": self.get_sta_txt("start", "small"),
+            "txt_remind_s": self.get_sta_txt("enter (z) chose it", "small"),
+            "txt_remind2_s": self.get_sta_txt("enter space end fight", "small"),
             "monster_sg_s": self.get_static_img(c.MONS_SLING_IMG),
             "monster_sr_s": self.get_static_img(c.MONS_SLINR_IMG),
             "monster_sb_s": self.get_static_img(c.MONS_SLINB_IMG),
@@ -204,6 +212,20 @@ class Shower():
         title_s = "第" + str(self.l_index) + "层"
         title_h = self.img_list.get_sta_txt(title_s, "small")
         surface.blit(title_h, (8, 8))
+
+    def fresh_dead_pane(self, index=0):
+        surface = self.screen.subsurface(c.STPANE_RECT)
+
+        # 绘制背景板
+        self.show_background([c.STPANE_W_G, c.STPANE_H_G], self.img_list.get_img("b_stone_s"), surface)
+
+        # 绘制结束界面
+        surface.blit(self.img_list.get_img("txt_go_s"), (40, 1*c.PIXEL_GRID))
+        surface.blit(self.img_list.get_img("arrow_r_s"), (1*c.PIXEL_GRID, (3+index)*c.PIXEL_GRID))
+        surface.blit(self.img_list.get_img("txt_restart_s"), (2*c.PIXEL_GRID, 3*c.PIXEL_GRID))
+        surface.blit(self.img_list.get_img("txt_end_s"), (2*c.PIXEL_GRID, 4*c.PIXEL_GRID))
+        surface.blit(self.img_list.get_img("txt_remind_s"), (16, 5*c.PIXEL_GRID + 16))
+
 
     # map为待映射的数组
     def fresh_layer(self):
@@ -382,6 +404,8 @@ class Shower():
         self.item_screen.blit(self.img_list.get_img("item_coin_s"), (0*c.PIXEL_GRID, 3*c.PIXEL_GRID))
 
         # 展示装备
+        atk_equip_pic = None
+        def_equip_pic = None
         if m_item["atk_equip"] is None:
             pass
         else:

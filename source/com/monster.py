@@ -1,3 +1,5 @@
+__author__ = "scarecrow_gpy"
+
 import random
 from .. import constants as c
 

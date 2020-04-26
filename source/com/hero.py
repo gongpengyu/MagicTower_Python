@@ -1,3 +1,5 @@
+__author__ = "scarecrow_gpy"
+
 from . import items
 from .. import constants as c
 
@@ -8,11 +10,11 @@ class Hero():
     def __init__(self):
         self.NAME = "steve"
         self.LV = 1
-        self.HP = 10000
-        self.ATK = 90
-        self.DEF = 100
+        self.HP = 100
+        self.ATK = 0
+        self.DEF = 0
         self.AGI = 20
-        self.EXP = 100
+        self.EXP = 0
         self.STATE = c.HERO_STA["normal"]
         self.ITEMS = {
             "y_key": 1,
@@ -169,6 +171,13 @@ class Hero():
                     txt = "get lv up"
 
         return txt
+
+    # 角色死亡
+    def isDeath(self):
+        if self.HP <= 0:
+            return True
+        else:
+            return False
 
     def print_hero(self):
         print("hp:", self.HP)

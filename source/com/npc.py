@@ -1,3 +1,5 @@
+__author__ = "scarecrow_gpy"
+
 import os
 import json
 class NpcList():

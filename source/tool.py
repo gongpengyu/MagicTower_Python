@@ -1,3 +1,4 @@
+__author__ = "scarecrow_gpy"
 # 提供一些小工具
 import os
 import pygame as pg

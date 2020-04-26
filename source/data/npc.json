@@ -90,7 +90,7 @@
         {
           "name": "up_lv",
           "cost": "exp",
-          "how_much": 70
+          "how_much": 60
         },
         {
           "name": "red_gem",
